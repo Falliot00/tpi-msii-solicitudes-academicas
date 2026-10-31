@@ -1,12 +1,40 @@
 # Solicitudes académicas
 
-Prototipo educativo para el TPI de Metodología de Sistemas II de Fermin Alliot,
+Prototipo educativo para el TPI de Metodología de Sistemas II de Fermín Alliot,
 legajo 101414, comisión M25 C4-02. Carrera Tecnicatura Universitaria en Programación
 a Distancia. Datos operativos ficticios.
 
-## Ejecución y uso
+## Arquitectura y funcionalidades
+
+El sistema permite registrar solicitudes, asignar responsables, cambiar estados,
+consultar mediante filtros y generar reportes. El análisis distingue nueve
+debilidades de la versión base y documenta cinco transformaciones de diseño.
+
+| Módulo | Responsabilidad |
+|---|---|
+| `catalogos.py` | Estudiantes y responsables sintéticos compartidos |
+| `dominio.py` | Solicitud, estados, tipos, prioridades e invariantes |
+| `modulo.py` | Coordinación de las cinco operaciones del caso de uso |
+| `repositorios.py` | Contrato de almacenamiento y adaptadores de memoria y JSON |
+| `cli.py` | Interpretación de comandos, composición y presentación JSON |
+| `inicial.py` | Versión base conservada para comparar diseño y comportamiento |
+
+La consola selecciona el almacenamiento e inyecta su contrato en
+`ModuloSolicitudes`. Las transiciones se resuelven en `Solicitud`; el dominio no
+conoce rutas ni escritura en disco. Memoria y JSON satisfacen la misma interfaz
+de tres operaciones: listar, obtener y guardar. El
+[diagrama](docs/arquitectura.mmd) y las
+[decisiones de diseño](docs/refactorings.md) detallan el alcance de SOLID.
+
+## Instalación, ejecución y uso
 
 Python 3.11 o superior. Sin dependencias para ejecutar el sistema y sus pruebas.
+Clonar el repositorio y entrar en su carpeta:
+
+```console
+git clone https://github.com/Falliot00/tpi-msii-solicitudes-academicas.git
+cd tpi-msii-solicitudes-academicas
+```
 
 ```console
 python -m solicitudes demo
@@ -41,6 +69,24 @@ el texto busca parte del asunto sin distinguir mayúsculas ni eliminar tildes.
 Salida JSON por stdout. Errores de dominio: código 2; de persistencia: código 3.
 El archivo JSON no admite edición concurrente segura.
 
+## Refactorings aplicados
+
+| ID | Transformación | Diagnóstico | Comprobación asociada |
+|---|---|---|---|
+| R01 | Extract Method: validación con nombre de dominio | D01, D06 | Rechazo de registros inválidos en ambas versiones |
+| R02 | Move Method: transiciones en Solicitud | D01, D05, D07 | Matriz de estados, responsable e idempotencia |
+| R03 | Introduce Parameter Object: NuevaSolicitud y FiltroSolicitudes | D02 | Normalización y filtros combinados |
+| R04 | Extract Class: repositorios por contrato inyectado | D04, D05 | Mismo contrato para memoria y JSON |
+| R05 | Tipos de dominio, inmutabilidad y colección encapsulada | D03, D07, D08 | Inmutabilidad, copias y compatibilidad del archivo |
+
+La protección ante archivo corrupto y el reemplazo atómico atienden D09 y se
+registran como mejoras de robustez adicionales. Los fragmentos antes/después
+están en [refactorings](docs/refactorings.md); la relación completa con pruebas
+está en [trazabilidad](docs/trazabilidad.md). La nomenclatura se apoya en el
+[catálogo de Fowler](https://refactoring.com/catalog/); los criterios de nombres,
+funciones y comentarios se vinculan con
+[Clean Code de Robert C. Martin](https://www.informit.com/store/clean-code-a-handbook-of-agile-software-craftsmanship-9780132350884).
+
 ## Validación
 
 ```console
@@ -71,9 +117,14 @@ Tags: estado-inicial, estadorefactorizado, etapa-diagnostico, etapa-refactoring,
 etapa-pruebas y etapa-docs. El nombre estadorefactorizado reproduce la consigna.
 El archivo inicial permanece idéntico en la versión final.
 
-docs contiene alcance, diagnóstico de nueve debilidades, cinco refactorings,
-checklist de revisión, trazabilidad, informe editable, guion de defensa y registro
-de IA. Los resultados reales de herramientas se conservan en docs/evidencias.
+- [Alcance y reglas](docs/alcance.md).
+- [Diagnóstico de calidad y nueve debilidades](docs/diagnostico.md).
+- [Checklist y resultados de code review](docs/code_review.md).
+- [Informe técnico editable](docs/informe.md) y [guion de defensa](docs/guion_video.md).
+- [Metodología y herramientas de asistencia](docs/ia/registro.md).
+- [Referencias técnicas y aplicación al caso](docs/referencias_tecnicas.md).
+
+Los resultados ejecutados se conservan en `docs/evidencias`.
 
 El ZIP incluye Repositorio.bundle con commits y tags. Para recuperarlo desde
 el ZIP extraído:
@@ -107,5 +158,12 @@ real del video y regenerar PDF y ZIP antes de entregar. La
 cátedra exige PDF, repositorio, ZIP y video cargados. El guion de 12 a 14 minutos
 no sustituye grabar con cámara al inicio y voz propia.
 
-Este prototipo fue construido para la actividad con asistencia de IA. No se
-presenta como un sistema previo de producción ni como experiencia laboral real.
+## Identificación y herramientas de asistencia
+
+Fermín Alliot es el único integrante y responsable de presentar y defender la
+entrega. Aportó las fuentes, definió el alcance, eligió el caso y autorizó su
+publicación. La asistencia de Codex incluyó análisis, elaboración del código y
+de los casos de prueba, ejecución de herramientas, revisión y documentación.
+El [anexo de metodología](docs/ia/registro.md) delimita esas actividades y separa
+las comprobaciones registradas de la revisión personal del estudiante. El
+prototipo fue construido para la actividad y utiliza datos operativos sintéticos.

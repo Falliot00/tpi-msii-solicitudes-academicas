@@ -150,6 +150,10 @@ Un smell es una señal que requiere juicio. No se presenta toda función larga
 como defectuosa por su tamaño ni se denomina God Class a este prototipo pequeño.
 El diagnóstico se apoya en responsabilidades y conocimiento duplicado.
 
+Se adoptó el criterio de Fowler: las transformaciones internas deben preservar
+el comportamiento definido [F0]. Cada debilidad se vincula con una decisión y
+una comprobación; el tamaño del código, por sí solo, no demuestra calidad.
+
 <!-- salto -->
 # 4 Diagnóstico de deuda técnica
 
@@ -233,6 +237,12 @@ asignar, cambiar_estado, buscar y reporte. El contrato de almacenamiento tiene
 listar, obtener y guardar. Se evita introducir interfaces para dependencias
 que todavía no existen.
 
+La separación responde a razones de cambio distintas: modificar una regla
+académica, cambiar almacenamiento e interpretar comandos. Esta aplicación de
+SRP sigue el criterio de Martin [M2]. La interfaz inyectada concreta DIP;
+su tamaño y los dos adaptadores permiten evaluar ISP y LSP dentro del contrato
+declarado [M3]. La tabla expone la interpretación aplicada y sus límites.
+
 <!-- arquitectura -->
 
 | Principio | Evidencia concreta y límite |
@@ -247,6 +257,10 @@ Clean Code se aplica mediante nombres expresivos, funciones enfocadas, objetos
 de parámetros y errores comprensibles. La entidad es inmutable y devuelve un
 nuevo valor al cambiar. La conversión a JSON produce un diccionario independiente.
 La CLI separa errores de dominio (código 2) y persistencia (código 3).
+
+Los nombres del dominio, las funciones enfocadas y los comentarios de propósito
+se relacionan con los capítulos 2, 3 y 4 de Clean Code [M1]. Estos criterios
+orientan la lectura; su aplicación se comprueba sobre el código y las pruebas.
 
 <!-- salto -->
 # 6 Refactorings con evidencia antes y después
@@ -266,6 +280,9 @@ Después, validar_estudiante_y_asunto expresa la regla y NuevaSolicitud la utili
 La conversión desde texto preserva la precedencia de errores. Atiende D01 y D06.
 Prueba asociada: test_registros_invalidos_no_se_guardan en ambas versiones.
 
+La extracción se vincula con Extract Function, también denominado Extract
+Method en el catálogo de Fowler [F1]: el nombre expresa el propósito del bloque.
+
 ## R02 Move Method y reubicación de responsabilidad
 
 Antes, procesar leía s["estado"], creaba el mapa p y mutaba el diccionario.
@@ -282,6 +299,9 @@ self._repositorio.guardar(solicitud)
 La regla queda junto al estado al que protege. No cambia el recorrido permitido.
 Atienden D01, D05 y D07. Pruebas asociadas: matriz de 16 pares, responsable
 obligatorio, saltos, reapertura e idempotencia.
+
+La reubicación corresponde al criterio de Move Function / Move Method [F2].
+Se preserva la regla; se modifica el lugar que concentra su responsabilidad.
 
 Las ubicaciones completas y el razonamiento están en docs/refactorings.md.
 La evidencia de antes se vincula al tag estado-inicial y la de después al
@@ -304,6 +324,9 @@ def registrar(self, nueva: NuevaSolicitud) -> Solicitud:
 
 Atiende D02. Lo verifican registro normalizado y filtros combinados.
 
+Introduce Parameter Object agrupa datos que viajan juntos [F3]. Se usan dos
+objetos porque registrar y buscar representan entradas de operaciones diferentes.
+
 ## R04 Extract Class e inversión de dependencia
 
 Antes, GestorInicial escribía el archivo y repetía la búsqueda por ID. Después,
@@ -311,12 +334,19 @@ RepositorioMemoria y RepositorioJson cumplen listar, obtener y guardar. El
 módulo recibe ese contrato. La CLI selecciona el adaptador sin modificar reglas.
 Atienden D04 y D05. El mismo contrato de prueba se aplica a ambos almacenamientos.
 
+La extracción sigue Extract Class [F4] y la dirección de dependencia de DIP
+[M3]. La interfaz se justifica por dos adaptadores existentes, memoria y JSON.
+
 ## R05 Reemplazar primitivas y encapsular colección
 
 Antes, las solicitudes eran diccionarios mutables con cadenas dispersas.
 Después, Estado, TipoSolicitud y Prioridad definen vocabulario; Solicitud es
 inmutable. La lista devuelta puede modificarse sin afectar el repositorio.
 Atienden D03, D07 y D08. Se verifica inmutabilidad y compatibilidad del JSON.
+
+Se combinan ideas de Replace Primitive with Object y Encapsulate Collection
+[F5, F6], adaptadas a enums, dataclass y copias. No se equipara un enum aislado
+con todos los ejemplos del catálogo.
 
 ## Mejoras adicionales de robustez
 
@@ -439,7 +469,7 @@ humana o una aprobación docente.
 3. Mantener invariantes a través de una entidad inmutable y almacenamiento por contrato.
 4. Pasar suite, typecheck, lint y formato, con resultados conservados.
 5. Mantener la versión inicial disponible y todas las transformaciones trazables.
-6. Declarar límites y contribución de IA sin inventar participación humana.
+6. Identificar herramientas utilizadas, alcance de asistencia y límites de verificación.
 
 ## Revisión por estándares y por especificación
 
@@ -516,7 +546,7 @@ solicitudes/     Versión inicial, dominio, módulo, CLI y repositorios
 tests/           Contratos, reglas, archivos y consola
 docs/            Diagnóstico, refactorings, review y trazabilidad
 docs/evidencias/ Salidas verificables de herramientas
-docs/ia/         Registro de intercambios y revisión asistida
+docs/ia/         Metodología, herramientas y revisión asistida
 tools/           Verificación y construcción del informe
 config_entrega.json  Enlaces reales cuando estén disponibles
 ```
@@ -526,32 +556,36 @@ de una carpeta de código sin .git, el bundle mantiene commits y tags. El README
 explica cómo clonar el historial y ejecutar las dos versiones.
 
 <!-- salto -->
-# 11 Uso de inteligencia artificial
+# 11 Metodología y herramientas de asistencia
 
 Herramienta utilizada: Codex de OpenAI. Grado de intervención: alto.
-Se empleó para analizar los materiales, generar las versiones inicial y
-refactorizada, crear pruebas, ejecutar verificaciones, revisar el código y
-redactar el informe y el guion.
+La asistencia incluyó análisis del caso y de calidad, identificación de
+debilidades, decisiones de diseño, elaboración de ambas versiones y de los
+casos de prueba, verificaciones, revisión y documentación.
 
-Fermin Alliot aportó las fuentes de la materia, definió el alcance, eligió
-el caso y la modalidad individual, y autorizó la publicación. Es responsable
-de revisar el material y explicar las decisiones técnicas durante la defensa.
+Fermín Alliot es el único integrante. Aportó las fuentes, definió el alcance,
+eligió el caso y autorizó la publicación. Es responsable de revisar la entrega
+y explicar las decisiones técnicas durante la defensa.
 
 ## Actividades y evidencias
 
-| Etapa | Decisión o resultado registrado |
-|---|---|
-| Consulta de fuentes | Consigna oficial, modelos y materiales de unidades 1, 3 y 4 |
-| Definición del alcance | Sistema base y refactorizado, informe, anexo y guion |
-| Selección del caso | Solicitudes académicas con datos ficticios y cinco operaciones |
-| Construcción y mejora | Versión inicial conservada, diagnóstico y refactorings trazables |
-| Verificación y revisión | Pruebas ejecutadas y hallazgos corregidos con evidencia |
-| Publicación | Repositorio público con historial y seis tags |
+| ID | Actividad de asistencia | Control o evidencia |
+|---|---|---|
+| A01 | Fuentes, análisis del caso, diagnóstico y diseño | Nueve debilidades y trazabilidad |
+| A02 | Versiones, datos sintéticos, pruebas y verificaciones | Base conservada y 40 tests finales |
+| A03 | Revisión mediante dos agentes y corrección de hallazgos | Checklist y registro técnico |
+| A04 | Redacción, formato, entrega y publicación autorizada | PDF, ZIP con hashes y repositorio |
 
-El anexo contiene un registro resumido de objetivos, decisiones, actividades
-y resultados en docs/ia/registro.md, sin transcripciones de respuestas personales.
-Los pedidos técnicos de revisión y sus resultados se conservan en
-revision_agentes.md. Las evidencias de ejecución están en docs/evidencias.
+Las filas son síntesis de actividades registradas, no citas ni cuatro consultas
+aisladas. El detalle está en docs/ia/registro.md; los pedidos técnicos y resultados
+de revisión se conservan en revision_agentes.md. No se transcriben respuestas
+personales del estudiante en este apartado.
+
+## Validación humana posterior
+
+La revisión personal debe contrastar consigna, código, antes/después y pruebas,
+y registrar fecha, versión, procedimiento y resultado. Las ejecuciones de
+herramientas y la revisión por agentes no acreditan esa revisión manual.
 
 La defensa se realizará con voz propia. La grabación y el enlace del video
 permanecen pendientes.
@@ -587,3 +621,41 @@ Las fuentes se consultaron en la carpeta de Metodología de Sistemas 2 indicada
 por el estudiante. Los archivos de la cátedra no fueron modificados ni se
 redistribuyen completos en el anexo. El análisis específico corresponde al
 código y a las ejecuciones de este prototipo.
+
+<!-- salto -->
+# 13 Referencias técnicas
+
+Fuentes primarias consultadas el 31 de octubre de 2026. Las referencias
+fundamentan criterios; su aplicación al prototipo es el análisis documentado
+en este informe. No constituyen certificaciones de su corrección.
+
+F0. Fowler, Martin (2004). Refactoring Malapropism. Preservación del comportamiento.
+https://martinfowler.com/bliki/RefactoringMalapropism.html
+
+F1. Fowler, Martin. Catálogo: Extract Function (alias Extract Method).
+https://refactoring.com/catalog/extractFunction.html
+
+F2. Fowler, Martin. Catálogo: Move Function (alias Move Method).
+https://refactoring.com/catalog/moveFunction.html
+
+F3. Fowler, Martin. Catálogo: Introduce Parameter Object.
+https://refactoring.com/catalog/introduceParameterObject.html
+
+F4. Fowler, Martin. Catálogo: Extract Class.
+https://refactoring.com/catalog/extractClass.html
+
+F5. Fowler, Martin. Catálogo: Replace Primitive with Object.
+https://refactoring.com/catalog/replacePrimitiveWithObject.html
+
+F6. Fowler, Martin. Catálogo: Encapsulate Collection.
+https://refactoring.com/catalog/encapsulateCollection.html
+
+M1. Martin, Robert C. (2008). Clean Code: A Handbook of Agile Software Craftsmanship.
+Pearson. ISBN 9780132350884. Capítulos 2, 3, 4 y 7.
+https://www.informit.com/store/clean-code-a-handbook-of-agile-software-craftsmanship-9780132350884
+
+M2. Martin, Robert C. (2014). The Single Responsibility Principle.
+https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html
+
+M3. Martin, Robert C. (2020). Solid Relevance. Desarrollo de los cinco principios.
+https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html

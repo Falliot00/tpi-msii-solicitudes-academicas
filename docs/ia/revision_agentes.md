@@ -142,5 +142,8 @@ mía. Enlaces externos, tags finales y ZIP continúan como pasos de cierre conoc
 Standards: una infracción P2 y un posible smell asociado, ambos cerrados.
 Spec: un hallazgo documental P2, cerrado. Ningún hallazgo técnico pendiente
 detectado en el alcance revisado. La revisión no demuestra ausencia de todos
-los bugs y no incluye aprobación humana. La grabación del video y la publicación
-GitHub requieren completar acciones externas reales.
+los bugs y no incluye aprobación humana. Los pedidos y respuestas anteriores
+describen el estado durante la revisión: la publicación de GitHub todavía no
+estaba autorizada ni realizada. Posteriormente se autorizó y publicó el
+repositorio; su estado actual figura en ../publicacion.md. La grabación y el
+enlace del video permanecen pendientes.

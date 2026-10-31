@@ -3,6 +3,12 @@
 Comparación estable: solicitudes/inicial.py en estado-inicial frente a los
 módulos nuevos. La copia inicial permanece idéntica en el estado final.
 
+Las transformaciones se contrastan con el catálogo de Fowler; los criterios de
+nombres, funciones y responsabilidad se vinculan con Martin. Las
+[referencias técnicas](referencias_tecnicas.md) relacionan cada fuente con una
+decisión del caso. El alcance de asistencia y la participación individual constan
+en [metodología y herramientas](ia/registro.md).
+
 ## R01 Extract Method
 
 Antes, procesar validaba estudiante y asunto dentro de su rama de registro:

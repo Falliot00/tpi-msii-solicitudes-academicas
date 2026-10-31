@@ -13,6 +13,12 @@ demos y preservación de inicial.py PASS. Revisión de estándares y especificac
 hallazgos corregidos y revalidados. React Doctor no aplica. La publicación
 solo actualiza documentación, configuración de enlaces y generación del informe.
 
+La revisión documental posterior reorganiza README y anexo de metodología,
+vincula las decisiones con Fowler y Martin y conserva la contribución real de
+las herramientas. Código, tests y configuración de validación no cambian;
+sus resultados previos siguen vigentes. Las comprobaciones ejecutadas no se
+presentan como validación manual personal del estudiante.
+
 Pendiente para la entrega formal: grabar con cámara al inicio y voz propia,
 publicar el video y colocar su enlace real en config_entrega.json. Después
 regenerar informe y anexo, revisar accesos y cargar los recursos en la plataforma.

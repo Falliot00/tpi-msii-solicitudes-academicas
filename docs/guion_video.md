@@ -9,8 +9,8 @@ Adaptar la redacción a la forma personal de explicar y ensayar los comandos.
 
 "Soy Fermin Alliot, legajo 101414, de la comisión M25 C4-02 de la Tecnicatura
 Universitaria en Programación a Distancia. Presento mi Trabajo Práctico Integrador
-de Metodología de Sistemas II. Analicé un prototipo de solicitudes académicas
-para mejorar su calidad interna y verificar que conserve su comportamiento."
+de Metodología de Sistemas II. El trabajo analiza un prototipo de solicitudes
+académicas para mejorar su calidad interna y verificar su comportamiento."
 
 Mostrar portada. Explicar que el trabajo es individual y describir el uso de
 IA en la implementación, las pruebas y la documentación, según la declaración
@@ -20,8 +20,8 @@ del informe. Presentar con palabras propias las decisiones que se van a defender
 
 "El sistema permite registrar una solicitud, asignar un responsable, cambiar su
 estado, buscar por filtros y obtener un reporte. Usa estudiantes y responsables
-ficticios. Elegí una consola y almacenamiento local para concentrar el trabajo
-en diseño y verificación. No implementé autenticación ni múltiples usuarios
+ficticios. Se utiliza una consola y almacenamiento local para concentrar el
+trabajo en diseño y verificación. El prototipo no tiene autenticación ni usuarios
 simultáneos. Las tres estructuras principales son Estudiante, Responsable y
 Solicitud. El estado inicial existe en Git y se puede ejecutar por separado."
 
@@ -48,10 +48,10 @@ hubo una evaluación de usabilidad con usuarios reales.
 
 ## 03:20 a 05:00 Deuda técnica y smells
 
-"Registré nueve debilidades. Para cada una documenté evidencia, ubicación,
+"Se registraron nueve debilidades. Para cada una se documentó evidencia, ubicación,
 impacto, riesgo y prioridad. Los ejemplos más claros son el método con varias
 responsabilidades, los parámetros excesivos, la búsqueda repetida, las cadenas
-que representan estados y la colección mutable expuesta. Prioricé proteger
+que representan estados y la colección mutable expuesta. Se priorizó proteger
 las reglas y el almacenamiento antes de ampliar funcionalidades."
 
 Mostrar D01, D04, D07 y D09. Explicar un costo concreto: agregar un estado exige
@@ -59,13 +59,15 @@ revisar transición, filtro y reporte en el código inicial. No leer toda la tab
 
 ## 05:00 a 07:20 Refactorings y principios
 
-"Apliqué Extract Method para aislar validación, reubiqué las transiciones en
-Solicitud e introduje NuevaSolicitud y FiltroSolicitudes como objetos de
-parámetros. Extraje los repositorios y reemplacé cadenas dispersas por enums.
+"Se aplicó Extract Method para aislar validación, se reubicaron las transiciones
+en Solicitud y se introdujeron NuevaSolicitud y FiltroSolicitudes como objetos de
+parámetros. Se extrajeron los repositorios y se agruparon los estados en enums.
 Solicitud es inmutable, por lo que una operación devuelve un nuevo valor."
 
 Mostrar solicitudes/dominio.py, modulo.py y repositorios.py. Seguir un cambio
 de estado desde el módulo hasta la entidad. Usar docs/refactorings.md como apoyo.
+Relacionar las transformaciones con Fowler y la separación de responsabilidades
+con Martin, según docs/referencias_tecnicas.md. Explicar la aplicación al código.
 
 "SRP separa reglas, coordinación, persistencia y consola. DIP aparece porque
 el módulo recibe el contrato de repositorio. Los adaptadores de memoria y JSON
@@ -92,8 +94,8 @@ Si defensa.json ya contiene datos, usar otra ruta nueva y tomar el ID que
 devuelva registrar. El primer cambio de estado debe rechazarse porque falta
 responsable. Señalar que ese rechazo es el comportamiento esperado.
 
-"Las 13 pruebas de caracterización se aplican a ambas versiones. También
-verifiqué los 16 pares de estados, el contrato de almacenamiento, compatibilidad
+"Las 13 pruebas de caracterización se aplican a ambas versiones. También se
+verifican los 16 pares de estados, el contrato de almacenamiento, compatibilidad
 del JSON, errores y conservación del archivo cuando falla el reemplazo.
 Los resultados y comandos ejecutados están en docs/evidencias."
 

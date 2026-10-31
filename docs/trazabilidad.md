@@ -8,11 +8,12 @@
 | SOLID y Clean Code según corresponda | dominio.py, modulo.py, repositorios.py | tabla de principios en refactorings.md |
 | Cuatro refactorings, incluidos los tres obligatorios | R01 a R05 en refactorings.md | diff estado-inicial frente a estadorefactorizado |
 | Pruebas antes y después | tests/test_contrato.py y demás tests | suite_completa.txt y validacion.json |
-| Code review aplicado y correcciones | code_review.md | observaciones CR01 a CR04, revisión por dos ejes |
+| Code review aplicado y correcciones | code_review.md | observaciones CR01 a CR06, revisión por dos ejes |
 | Conclusiones y límites | informe.md y refactorings.md | reflexión técnica sin métricas inventadas |
 | README, /docs y commits claros | README.md y árbol Git | git log y tags |
 | Tags de estados y de etapas | historial Git | estado-inicial, estadorefactorizado, etapa-diagnostico, etapa-refactoring, etapa-pruebas, etapa-docs |
-| Declaración y evidencia de IA | docs/ia/registro.md y revision_agentes.md | actividades resumidas, pedidos técnicos y resultados de revisión |
+| Declaración y evidencia de IA | docs/ia/registro.md y revision_agentes.md | cuatro actividades resumidas, pedidos reales y resultados de revisión |
+| Fundamentación de decisiones | referencias_tecnicas.md e informe.md | Fowler, Clean Code y SOLID vinculados con cambios y pruebas |
 | PDF único y anexo ZIP | entrega/ | generación, revisión visual y comprobación del paquete |
 | Video de 10 a 15 minutos con cámara inicial y voz propia | guion_video.md | Guion preparado; grabación y enlace pendientes |
 | Repositorio GitHub y enlaces accesibles | config_entrega.json y publicacion.md | GitHub público verificado; enlace del video pendiente |
