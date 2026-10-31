@@ -1,0 +1,2 @@
+$ C:\Users\fermi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m mypy
+Success: no issues found in 8 source files

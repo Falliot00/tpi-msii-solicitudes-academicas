@@ -1,0 +1,54 @@
+$ C:\Users\fermi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest discover -s tests -v
+test_archivo_inicial_es_compatible_con_version_final (test_cli.ConsolaTest.test_archivo_inicial_es_compatible_con_version_final) ... ok
+test_demo_identica_en_ambas_versiones (test_cli.ConsolaTest.test_demo_identica_en_ambas_versiones) ... FAIL
+test_error_de_dominio_y_sin_escritura (test_cli.ConsolaTest.test_error_de_dominio_y_sin_escritura) ... ok
+test_error_de_persistencia_controlado (test_cli.ConsolaTest.test_error_de_persistencia_controlado) ... ok
+test_precedencia_de_errores_compatible (test_cli.ConsolaTest.test_precedencia_de_errores_compatible) ... ok
+test_ciclo_completo (test_contrato.ContratoInicial.test_ciclo_completo) ... ok
+test_estado_identico_es_idempotente (test_contrato.ContratoInicial.test_estado_identico_es_idempotente) ... ok
+test_filtros_combinados_y_busqueda (test_contrato.ContratoInicial.test_filtros_combinados_y_busqueda) ... ok
+test_filtros_invalidos (test_contrato.ContratoInicial.test_filtros_invalidos) ... ok
+test_identificadores_correlativos (test_contrato.ContratoInicial.test_identificadores_correlativos) ... ok
+test_impide_asignar_solicitud_cerrada (test_contrato.ContratoInicial.test_impide_asignar_solicitud_cerrada) ... ok
+test_impide_salto_y_reapertura (test_contrato.ContratoInicial.test_impide_salto_y_reapertura) ... ok
+test_persistencia_entre_instancias (test_contrato.ContratoInicial.test_persistencia_entre_instancias) ... ok
+test_rechaza_referencias_inexistentes (test_contrato.ContratoInicial.test_rechaza_referencias_inexistentes) ... ok
+test_registro_y_normalizacion (test_contrato.ContratoInicial.test_registro_y_normalizacion) ... ok
+test_registros_invalidos_no_se_guardan (test_contrato.ContratoInicial.test_registros_invalidos_no_se_guardan) ... ok
+test_reporte_vacio_y_con_datos (test_contrato.ContratoInicial.test_reporte_vacio_y_con_datos) ... ok
+test_requiere_responsable (test_contrato.ContratoInicial.test_requiere_responsable) ... ok
+test_ciclo_completo (test_contrato.ContratoRefactorizado.test_ciclo_completo) ... ok
+test_estado_identico_es_idempotente (test_contrato.ContratoRefactorizado.test_estado_identico_es_idempotente) ... ok
+test_filtros_combinados_y_busqueda (test_contrato.ContratoRefactorizado.test_filtros_combinados_y_busqueda) ... ok
+test_filtros_invalidos (test_contrato.ContratoRefactorizado.test_filtros_invalidos) ... ok
+test_identificadores_correlativos (test_contrato.ContratoRefactorizado.test_identificadores_correlativos) ... ok
+test_impide_asignar_solicitud_cerrada (test_contrato.ContratoRefactorizado.test_impide_asignar_solicitud_cerrada) ... ok
+test_impide_salto_y_reapertura (test_contrato.ContratoRefactorizado.test_impide_salto_y_reapertura) ... ok
+test_persistencia_entre_instancias (test_contrato.ContratoRefactorizado.test_persistencia_entre_instancias) ... ok
+test_rechaza_referencias_inexistentes (test_contrato.ContratoRefactorizado.test_rechaza_referencias_inexistentes) ... ok
+test_registro_y_normalizacion (test_contrato.ContratoRefactorizado.test_registro_y_normalizacion) ... ok
+test_registros_invalidos_no_se_guardan (test_contrato.ContratoRefactorizado.test_registros_invalidos_no_se_guardan) ... ok
+test_reporte_vacio_y_con_datos (test_contrato.ContratoRefactorizado.test_reporte_vacio_y_con_datos) ... ok
+test_requiere_responsable (test_contrato.ContratoRefactorizado.test_requiere_responsable) ... ok
+test_matriz_completa_de_transiciones (test_dominio.ReglasDeEstado.test_matriz_completa_de_transiciones) ... ok
+test_no_se_muta_la_entidad_original (test_dominio.ReglasDeEstado.test_no_se_muta_la_entidad_original) ... ok
+test_archivo_corrupto_no_se_sobrescribe (test_repositorios.JsonTest.test_archivo_corrupto_no_se_sobrescribe) ... ok
+test_contrato_de_almacenamiento (test_repositorios.JsonTest.test_contrato_de_almacenamiento) ... ok
+test_fallo_de_reemplazo_preserva_archivo_y_limpia_temporal (test_repositorios.JsonTest.test_fallo_de_reemplazo_preserva_archivo_y_limpia_temporal) ... ok
+test_reabrir_y_recuperar_acentos (test_repositorios.JsonTest.test_reabrir_y_recuperar_acentos) ... ok
+test_rechaza_formatos_e_invariantes_invalidos (test_repositorios.JsonTest.test_rechaza_formatos_e_invariantes_invalidos) ... ok
+test_contrato_de_almacenamiento (test_repositorios.MemoriaTest.test_contrato_de_almacenamiento) ... ok
+
+======================================================================
+FAIL: test_demo_identica_en_ambas_versiones (test_cli.ConsolaTest.test_demo_identica_en_ambas_versiones)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fermi\.codex\.chatgpt-projects\g-p-6a9ec78522408191890e6e5ae2beac48\output\TPI_MSII_Alliot_Fermin\tests\test_cli.py", line 36, in test_demo_identica_en_ambas_versiones
+    self.assertEqual(salidas[0], salidas[1])
+AssertionError: {'reg[145 chars]o': 'en_proceso', 'responsable_id': 1}, 'asign[652 chars] 0}}} != {'reg[145 chars]o': 'abierta', 'responsable_id': None}, 'asign[649 chars] 0}}}
+Diff is 1744 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.272s
+
+FAILED (failures=1)

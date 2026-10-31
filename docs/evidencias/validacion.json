@@ -1,0 +1,31 @@
+{
+  "fecha": "2026-10-31T05:50:15.386619-03:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "resultados": {
+    "suite_completa": {
+      "estado": "PASS",
+      "codigo": 0
+    },
+    "typecheck": {
+      "estado": "PASS",
+      "codigo": 0
+    },
+    "lint": {
+      "estado": "PASS",
+      "codigo": 0
+    },
+    "formato": {
+      "estado": "PASS",
+      "codigo": 0
+    },
+    "base_preservada": {
+      "estado": "PASS",
+      "codigo": 0
+    },
+    "demo_equivalente": {
+      "estado": "PASS",
+      "codigo": 0
+    }
+  },
+  "react_doctor": "NO APLICA: no hay React ni Next.js"
+}

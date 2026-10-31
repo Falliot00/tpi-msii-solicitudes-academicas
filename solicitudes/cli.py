@@ -3,6 +3,7 @@
 import argparse
 import json
 import sys
+from copy import deepcopy
 from dataclasses import asdict
 from pathlib import Path
 from typing import Sequence
@@ -120,7 +121,7 @@ def demo(implementacion: str) -> object:
         ["reporte"],
     ]
     for comando in comandos:
-        resultados[comando[0]] = ejecutar(modulo, parser().parse_args(comando))
+        resultados[comando[0]] = deepcopy(ejecutar(modulo, parser().parse_args(comando)))
     return resultados
 
 
