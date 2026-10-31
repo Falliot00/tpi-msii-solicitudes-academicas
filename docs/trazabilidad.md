@@ -15,7 +15,7 @@
 | Declaración y evidencia de IA | docs/ia/registro.md y revision_agentes.md | mensajes relevantes y pedidos de revisión |
 | PDF único y anexo ZIP | entrega/ | generación, revisión visual y comprobación del paquete |
 | Video de 10 a 15 minutos con cámara inicial y voz propia | guion_video.md | Guion preparado; grabación y enlace pendientes |
-| Repositorio GitHub y enlaces accesibles | config_entrega.json | Repositorio local preparado; publicación pendiente |
+| Repositorio GitHub y enlaces accesibles | config_entrega.json y publicacion.md | GitHub público verificado; enlace del video pendiente |
 
 Los tags señalan hitos del proceso, no ocho entregas independientes. El tag
 estado-inicial conserva el ejecutable original; el tag estadorefactorizado

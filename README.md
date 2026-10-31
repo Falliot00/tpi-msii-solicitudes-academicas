@@ -83,7 +83,12 @@ git clone Repositorio.bundle solicitudes-academicas
 ```
 
 La carpeta codigo del ZIP se puede ejecutar sin Git. El bundle conserva el
-historial. No se hizo push ni se publicó el repositorio automáticamente.
+historial. El repositorio público está en:
+
+https://github.com/Falliot00/tpi-msii-solicitudes-academicas
+
+La publicación del código, documentación, commits y tags se realizó con
+autorización explícita del estudiante.
 
 ## Informe y entrega
 
@@ -97,8 +102,8 @@ El informe se guarda en entrega/Alliot_Fermin_TPI_MSII.pdf. Para empaquetar,
 primero completar el cierre de Git. entrega/ está excluida del versionado para
 evitar archivos recursivos y contenido dependiente de su propio commit.
 
-Completar las URLs reales en config_entrega.json y regenerar PDF y ZIP antes
-de entregar. GitHub y video figuran pendientes mientras no se publiquen. La
+El enlace público de GitHub ya está en config_entrega.json. Completar la URL
+real del video y regenerar PDF y ZIP antes de entregar. La
 cátedra exige PDF, repositorio, ZIP y video cargados. El guion de 12 a 14 minutos
 no sustituye grabar con cámara al inicio y voz propia.
 

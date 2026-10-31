@@ -237,9 +237,16 @@ def main() -> None:
                     )
                 else:
                     parrafo(nombre + ": pendiente de publicación y enlace accesible.")
-            parrafo(
-                "Estado: recursos locales preparados; la entrega requiere completar publicación y grabación."
-            )
+            if config.get("video"):
+                parrafo(
+                    "Estado: repositorio y video enlazados; verificar accesibilidad antes de entregar."
+                )
+            elif config.get("repositorio_github"):
+                parrafo(
+                    "Estado: repositorio GitHub publicado; falta grabar y publicar el video de defensa."
+                )
+            else:
+                parrafo("Estado: recursos locales preparados; faltan publicación y grabación.")
         elif linea.startswith("```"):
             bloque = []
             i += 1

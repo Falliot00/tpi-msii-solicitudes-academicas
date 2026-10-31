@@ -1,4 +1,4 @@
 {
   "Standards": "Se detectó una brecha P2 al construir entidades inválidas y una posible duplicación asociada. Se centralizaron las invariantes en Solicitud.__post_init__ y se delegaron desde JSON. El revisor comprobó la reproducción corregida y el delta final: ambos hallazgos cerrados, sin defectos nuevos detectados.",
-  "Spec": "Se detectó la falta de capturas de evidencias en el PDF. Se incorporaron dos capturas legibles con sus fuentes y se verificaron las páginas correspondientes. Hallazgo cerrado y sin defectos nuevos detectados en el delta. La publicación GitHub y la grabación del video permanecen pendientes, como declara el informe."
+  "Spec": "Se detectó la falta de capturas de evidencias en el PDF. Se incorporaron dos capturas legibles con sus fuentes y se verificaron las páginas correspondientes. Hallazgo cerrado y sin defectos nuevos detectados en el delta. GitHub se publicó después del cierre técnico, con autorización del estudiante. La grabación del video permanece pendiente."
 }

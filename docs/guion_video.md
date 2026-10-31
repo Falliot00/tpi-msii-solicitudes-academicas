@@ -134,7 +134,7 @@ con transacciones y autenticación, si el sistema fuera a usarse de verdad.
 - Estudiar por qué una transición se acepta o rechaza y cómo se conserva JSON.
 - Grabar con voz propia. No usar síntesis de voz ni un avatar como defensa.
 - Subir el video, comprobar acceso y colocar su URL en config_entrega.json.
-- Completar también la URL GitHub y regenerar el informe antes de entregar.
+- La URL GitHub ya está cargada. Comprobar su acceso y regenerar informe y anexo al agregar el video.
 
 ## Preguntas para practicar
 

@@ -21,7 +21,7 @@ Fuente de requisitos: docs/alcance.md y TP MS2V2.pdf.
 | Sin secretos ni datos operativos reales | catálogos sintéticos y revisión del diff | Verificado por inspección |
 | Nueve debilidades y cinco transformaciones trazables | diagnóstico y refactorings | Documentado |
 | Uso de IA declarado y guion con voz propia | docs/ia y guion | Documentado; grabación pendiente |
-| Publicación GitHub y URL del video accesibles | config_entrega.json | Pendiente de publicación real |
+| Publicación GitHub y URL del video accesibles | config_entrega.json y publicacion.md | GitHub público verificado; video pendiente |
 
 Los resultados ejecutables definitivos figuran en docs/evidencias/validacion.json.
 No se aprueba el conjunto documental completo mientras falten los enlaces y la

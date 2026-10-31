@@ -545,6 +545,7 @@ manual previa del estudiante.
 | Respuesta: usar el caso sugerido de solicitudes académicas | Selección del prototipo y alcance |
 | Indicación: realizarlo con el estudiante como único integrante | Portada, identificación y guion individuales |
 | Pedidos de revisión a dos agentes de IA | Reportes separados de estándares y especificación, con acciones |
+| Autorización: publicarlo como repositorio público para la cátedra | Publicación real de main y los seis tags, con enlace incorporado al informe |
 
 El registro detallado con citas literales, resúmenes identificados y resultados
 se adjunta en docs/ia/registro.md y revision_agentes.md dentro del ZIP. No es

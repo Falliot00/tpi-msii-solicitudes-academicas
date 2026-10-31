@@ -91,7 +91,9 @@ de la IA como reemplazo del resultado de ejecutar una herramienta.
 
 Registro de actividad: redacción del informe con diagnóstico, transformaciones,
 pruebas, revisión y límites; preparación de guion de defensa y paquete ZIP.
-Los enlaces GitHub y video permanecen pendientes hasta su publicación real.
+En la preparación inicial, los enlaces GitHub y video quedaron pendientes hasta
+su publicación real. GitHub se publicó después, con autorización explícita, como
+se registra en I08. El video permanece pendiente.
 No se inventaron URLs, evaluaciones docentes, capturas de usuarios o grabaciones.
 
 ## Criterio para revisar las sugerencias
@@ -100,3 +102,20 @@ Aceptar una propuesta solo si puede relacionarse con una debilidad observada,
 mantiene las reglas acordadas y cuenta con evidencia ejecutada. No afirmar
 aplicación total de SOLID, cobertura del 100 %, ausencia de bugs o mejora
 porcentual de rendimiento sin pruebas que lo demuestren.
+
+
+### I08 Publicación autorizada del repositorio
+
+Pregunta del asistente: "¿Autorizás crear Falliot00/tpi-msii-solicitudes-academicas
+en GitHub y subir el código, la documentación, los commits y los tags preparados?
+La documentación incluye tu nombre, legajo y comisión."
+
+Respuesta literal del estudiante: "Sí, publicarlo como repositorio público para la cátedra".
+
+Cuando GitHub rechazó la creación con la credencial disponible, el estudiante
+inició sesión en el navegador y respondió: "Ya inicié sesión con Falliot00".
+Se creó el repositorio desde esa sesión y se publicó main con los seis tags,
+sin reescribir el historial. El enlace real se incorporó al informe y al anexo.
+
+Repositorio: https://github.com/Falliot00/tpi-msii-solicitudes-academicas
+La grabación y publicación del video continúan pendientes.
