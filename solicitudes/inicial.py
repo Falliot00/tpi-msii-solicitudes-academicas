@@ -40,7 +40,7 @@ class GestorInicial:
                 raise ValueError("Tipo inválido")
             if prioridad not in ["baja", "media", "alta"]:
                 raise ValueError("Prioridad inválida")
-            s: dict[str, Any] | None = {
+            nueva: dict[str, Any] = {
                 "id": max([r["id"] for r in self.datos], default=0) + 1,
                 "estudiante_id": estudiante_id,
                 "asunto": asunto.strip(),
@@ -50,11 +50,11 @@ class GestorInicial:
                 "estado": "abierta",
                 "responsable_id": None,
             }
-            self.datos.append(s)
+            self.datos.append(nueva)
             self._guardar()
-            return s
+            return nueva
         if accion == "asignar":
-            s = None
+            s: dict[str, Any] | None = None
             for r in self.datos:
                 if r["id"] == solicitud_id:
                     s = r
