@@ -199,7 +199,7 @@ def main() -> None:
         elif linea == "<!-- arquitectura -->":
             elementos.extend([diagrama(normal), Spacer(1, 12)])
         elif linea in {"<!-- captura_demo -->", "<!-- captura_validacion -->"}:
-            nombre = "captura_demo.png" if "captura_demo" in linea else "captura_validacion.png"
+            nombre = "captura_demo.jpg" if "captura_demo" in linea else "captura_validacion.jpg"
             captura = Image(str(RAIZ / "docs/evidencias" / nombre))
             captura.drawHeight = captura.imageHeight * 467 / captura.imageWidth
             captura.drawWidth = 467
