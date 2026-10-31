@@ -1,0 +1,18 @@
+test_ciclo_completo (test_contrato.ContratoInicial.test_ciclo_completo) ... ok
+test_estado_identico_es_idempotente (test_contrato.ContratoInicial.test_estado_identico_es_idempotente) ... ok
+test_filtros_combinados_y_busqueda (test_contrato.ContratoInicial.test_filtros_combinados_y_busqueda) ... ok
+test_filtros_invalidos (test_contrato.ContratoInicial.test_filtros_invalidos) ... ok
+test_identificadores_correlativos (test_contrato.ContratoInicial.test_identificadores_correlativos) ... ok
+test_impide_asignar_solicitud_cerrada (test_contrato.ContratoInicial.test_impide_asignar_solicitud_cerrada) ... ok
+test_impide_salto_y_reapertura (test_contrato.ContratoInicial.test_impide_salto_y_reapertura) ... ok
+test_persistencia_entre_instancias (test_contrato.ContratoInicial.test_persistencia_entre_instancias) ... ok
+test_rechaza_referencias_inexistentes (test_contrato.ContratoInicial.test_rechaza_referencias_inexistentes) ... ok
+test_registro_y_normalizacion (test_contrato.ContratoInicial.test_registro_y_normalizacion) ... ok
+test_registros_invalidos_no_se_guardan (test_contrato.ContratoInicial.test_registros_invalidos_no_se_guardan) ... ok
+test_reporte_vacio_y_con_datos (test_contrato.ContratoInicial.test_reporte_vacio_y_con_datos) ... ok
+test_requiere_responsable (test_contrato.ContratoInicial.test_requiere_responsable) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.010s
+
+OK

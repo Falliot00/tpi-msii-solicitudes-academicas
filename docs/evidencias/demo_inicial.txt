@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "estudiante_id": 1,
+    "asunto": "Certificado regular",
+    "detalle": "Para beca",
+    "tipo": "constancia",
+    "prioridad": "alta",
+    "estado": "en_proceso",
+    "responsable_id": 1
+  }
+]
+{
+  "total": 1,
+  "por_estado": {
+    "abierta": 0,
+    "en_proceso": 1,
+    "resuelta": 0,
+    "cancelada": 0
+  }
+}
