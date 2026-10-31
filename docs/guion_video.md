@@ -12,9 +12,9 @@ Universitaria en Programación a Distancia. Presento mi Trabajo Práctico Integr
 de Metodología de Sistemas II. Analicé un prototipo de solicitudes académicas
 para mejorar su calidad interna y verificar que conserve su comportamiento."
 
-Mostrar portada. Explicar que el trabajo es individual. No atribuir participación
-a personas inexistentes. Aclarar que se utilizó IA como apoyo de alto alcance
-para código, pruebas y documentación, según la declaración del informe.
+Mostrar portada. Explicar que el trabajo es individual y describir el uso de
+IA en la implementación, las pruebas y la documentación, según la declaración
+del informe. Presentar con palabras propias las decisiones que se van a defender.
 
 ## 00:45 a 02:00 Caso y alcance
 

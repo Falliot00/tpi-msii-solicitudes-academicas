@@ -9,8 +9,8 @@ las decisiones del prototipo, sin convertir los ejemplos del modelo en requisito
 Gestión de solicitudes académicas. Único integrante: Fermin Alliot, legajo 101414,
 comisión M25 C4-02. Carrera Tecnicatura Universitaria en Programación a Distancia.
 Se construye un prototipo educativo nuevo con asistencia de IA y se conserva
-su estado inicial real antes de modificar su estructura. No se inventa un
-historial previo de producción, entrevistas, usuarios reales o revisión humana.
+su estado inicial antes de modificar su estructura. Las verificaciones y la
+revisión técnica asistida se identifican en sus evidencias.
 
 ## Funcionalidad observable
 

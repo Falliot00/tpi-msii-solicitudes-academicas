@@ -475,10 +475,9 @@ locales que se corrigieron antes de fijar la base validada.
 
 La experiencia técnica deja una distinción defendible: refactorizar cambia la
 estructura y requiere preservar reglas observables; agregar protección ante un
-archivo corrupto amplía comportamiento y necesita verificación propia. Esta
-reflexión resume los resultados del proceso asistido. El estudiante debe
-revisarla y explicarla con sus palabras durante la defensa; no se afirma haber
-comprobado todavía su aprendizaje o comprensión personal.
+archivo corrupto amplía comportamiento y necesita verificación propia.
+La defensa individual requiere explicar esta diferencia con ejemplos del
+código y relacionarla con las evidencias de prueba.
 
 ## Límites y próximos pasos
 
@@ -529,32 +528,33 @@ explica cómo clonar el historial y ejecutar las dos versiones.
 <!-- salto -->
 # 11 Uso de inteligencia artificial
 
-Se utilizó Codex de OpenAI como asistente en la aplicación de escritorio para
-leer materiales, proponer el diseño, generar las dos versiones del prototipo,
-crear pruebas, ejecutar comprobaciones, realizar revisión técnica asistida y
-redactar informe y guion. El grado de intervención fue alto. No se describe
-como simple corrección ortográfica ni se atribuye todo el código a escritura
-manual previa del estudiante.
+Herramienta utilizada: Codex de OpenAI. Grado de intervención: alto.
+Se empleó para analizar los materiales, generar las versiones inicial y
+refactorizada, crear pruebas, ejecutar verificaciones, revisar el código y
+redactar el informe y el guion.
 
-## Registro de intercambios relevantes
+Fermin Alliot aportó las fuentes de la materia, definió el alcance, eligió
+el caso y la modalidad individual, y autorizó la publicación. Es responsable
+de revisar el material y explicar las decisiones técnicas durante la defensa.
 
-| Intercambio real | Decisión y evidencia |
+## Actividades y evidencias
+
+| Etapa | Decisión o resultado registrado |
 |---|---|
-| Pedido del estudiante de consultar materiales de la materia | Lectura de consigna, modelos y referencias de unidades 1, 3 y 4 |
-| Respuesta: TPI completo, sistema base y refactorizado, informe, anexo y guion | Definición de entregables locales |
-| Respuesta: usar el caso sugerido de solicitudes académicas | Selección del prototipo y alcance |
-| Indicación: realizarlo con el estudiante como único integrante | Portada, identificación y guion individuales |
-| Pedidos de revisión a dos agentes de IA | Reportes separados de estándares y especificación, con acciones |
-| Autorización: publicarlo como repositorio público para la cátedra | Publicación real de main y los seis tags, con enlace incorporado al informe |
+| Consulta de fuentes | Consigna oficial, modelos y materiales de unidades 1, 3 y 4 |
+| Definición del alcance | Sistema base y refactorizado, informe, anexo y guion |
+| Selección del caso | Solicitudes académicas con datos ficticios y cinco operaciones |
+| Construcción y mejora | Versión inicial conservada, diagnóstico y refactorings trazables |
+| Verificación y revisión | Pruebas ejecutadas y hallazgos corregidos con evidencia |
+| Publicación | Repositorio público con historial y seis tags |
 
-El registro detallado con citas literales, resúmenes identificados y resultados
-se adjunta en docs/ia/registro.md y revision_agentes.md dentro del ZIP. No es
-una exportación íntegra de la interfaz de chat ni contiene afirmaciones de
-defensa, entrevistas o evaluación docente que no ocurrieron.
+El anexo contiene un registro resumido de objetivos, decisiones, actividades
+y resultados en docs/ia/registro.md, sin transcripciones de respuestas personales.
+Los pedidos técnicos de revisión y sus resultados se conservan en
+revision_agentes.md. Las evidencias de ejecución están en docs/evidencias.
 
-La IA no reemplaza la responsabilidad sobre lo entregado. Fermin Alliot debe
-estudiar el código, ejecutar el sistema, revisar los argumentos y defender las
-decisiones con voz propia. No se generó ni grabó una defensa sintética.
+La defensa se realizará con voz propia. La grabación y el enlace del video
+permanecen pendientes.
 
 <!-- salto -->
 # 12 Recursos de entrega y referencias

@@ -12,7 +12,7 @@
 | Conclusiones y límites | informe.md y refactorings.md | reflexión técnica sin métricas inventadas |
 | README, /docs y commits claros | README.md y árbol Git | git log y tags |
 | Tags de estados y de etapas | historial Git | estado-inicial, estadorefactorizado, etapa-diagnostico, etapa-refactoring, etapa-pruebas, etapa-docs |
-| Declaración y evidencia de IA | docs/ia/registro.md y revision_agentes.md | mensajes relevantes y pedidos de revisión |
+| Declaración y evidencia de IA | docs/ia/registro.md y revision_agentes.md | actividades resumidas, pedidos técnicos y resultados de revisión |
 | PDF único y anexo ZIP | entrega/ | generación, revisión visual y comprobación del paquete |
 | Video de 10 a 15 minutos con cámara inicial y voz propia | guion_video.md | Guion preparado; grabación y enlace pendientes |
 | Repositorio GitHub y enlaces accesibles | config_entrega.json y publicacion.md | GitHub público verificado; enlace del video pendiente |
