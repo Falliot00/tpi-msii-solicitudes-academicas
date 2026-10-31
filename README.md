@@ -4,12 +4,12 @@ Prototipo educativo para el TPI de Metodología de Sistemas II de Fermin Alliot,
 legajo 101414, comisión M25 C4-02. Carrera Tecnicatura Universitaria en Programación
 a Distancia. Datos operativos ficticios.
 
-## Estado inicial
+## Ejecución
 
 Python 3.11 o superior. Sin dependencias para ejecutar el sistema y sus pruebas.
 
 ```console
-python -m solicitudes
+python -m solicitudes demo
 python -m unittest discover -s tests -v
 ```
 

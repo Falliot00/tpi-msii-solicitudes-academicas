@@ -2,15 +2,51 @@
 
 import tempfile
 import unittest
+from argparse import Namespace
 from pathlib import Path
 from typing import Any
 
+from solicitudes.cli import ejecutar
 from solicitudes.inicial import GestorInicial
+from solicitudes.modulo import ModuloSolicitudes
+from solicitudes.repositorios import RepositorioJson, RepositorioMemoria
+
+
+class ConsolaRefactorizada:
+    """Ejercita la interfaz de comandos sin iniciar otro proceso por aserción."""
+
+    def __init__(self, archivo: Path | None = None) -> None:
+        self.modulo = ModuloSolicitudes(
+            RepositorioMemoria() if archivo is None else RepositorioJson(archivo)
+        )
+
+    def procesar(self, accion: str, **datos: Any) -> Any:
+        nombres = {
+            "estudiante_id": "estudiante",
+            "solicitud_id": "id",
+            "responsable_id": "responsable",
+        }
+        argumentos = dict(
+            estudiante=0,
+            asunto="",
+            detalle="",
+            tipo="",
+            prioridad="",
+            id=0,
+            responsable=0,
+            estado="",
+            texto="",
+        )
+        argumentos.update({nombres.get(k, k): v for k, v in datos.items()})
+        return ejecutar(self.modulo, Namespace(comando=accion, **argumentos))
 
 
 class ContratoInicial(unittest.TestCase):
+    def crear_gestor(self, archivo: Path | None = None) -> Any:
+        return GestorInicial(archivo)
+
     def setUp(self) -> None:
-        self.gestor = GestorInicial()
+        self.gestor = self.crear_gestor()
 
     def registrar(self, **cambios: Any) -> dict[str, Any]:
         datos = dict(
@@ -132,10 +168,15 @@ class ContratoInicial(unittest.TestCase):
     def test_persistencia_entre_instancias(self) -> None:
         with tempfile.TemporaryDirectory() as carpeta:
             archivo = Path(carpeta) / "solicitudes.json"
-            self.gestor = GestorInicial(archivo)
+            self.gestor = self.crear_gestor(archivo)
             self.registrar()
-            otro = GestorInicial(archivo)
+            otro = self.crear_gestor(archivo)
             self.assertEqual(otro.procesar("listar")[0]["asunto"], "Certificado regular")
+
+
+class ContratoRefactorizado(ContratoInicial):
+    def crear_gestor(self, archivo: Path | None = None) -> Any:
+        return ConsolaRefactorizada(archivo)
 
 
 if __name__ == "__main__":

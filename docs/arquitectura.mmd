@@ -1,0 +1,8 @@
+flowchart LR
+    U[Operador académico] --> C[CLI y salida JSON]
+    C --> M[Módulo de solicitudes]
+    M --> D[Solicitud y reglas de dominio]
+    M --> R[Contrato RepositorioSolicitudes]
+    R -. implementa .-> MEM[RepositorioMemoria]
+    R -. implementa .-> JSON[RepositorioJson]
+    JSON --> F[Archivo JSON local]
