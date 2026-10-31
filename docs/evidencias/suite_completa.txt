@@ -30,6 +30,7 @@ test_registro_y_normalizacion (test_contrato.ContratoRefactorizado.test_registro
 test_registros_invalidos_no_se_guardan (test_contrato.ContratoRefactorizado.test_registros_invalidos_no_se_guardan) ... ok
 test_reporte_vacio_y_con_datos (test_contrato.ContratoRefactorizado.test_reporte_vacio_y_con_datos) ... ok
 test_requiere_responsable (test_contrato.ContratoRefactorizado.test_requiere_responsable) ... ok
+test_construccion_rechaza_invariantes_invalidas (test_dominio.ReglasDeEstado.test_construccion_rechaza_invariantes_invalidas) ... ok
 test_matriz_completa_de_transiciones (test_dominio.ReglasDeEstado.test_matriz_completa_de_transiciones) ... ok
 test_no_se_muta_la_entidad_original (test_dominio.ReglasDeEstado.test_no_se_muta_la_entidad_original) ... ok
 test_archivo_corrupto_no_se_sobrescribe (test_repositorios.JsonTest.test_archivo_corrupto_no_se_sobrescribe) ... ok
@@ -40,6 +41,6 @@ test_rechaza_formatos_e_invariantes_invalidos (test_repositorios.JsonTest.test_r
 test_contrato_de_almacenamiento (test_repositorios.MemoriaTest.test_contrato_de_almacenamiento) ... ok
 
 ----------------------------------------------------------------------
-Ran 39 tests in 0.285s
+Ran 40 tests in 0.296s
 
 OK

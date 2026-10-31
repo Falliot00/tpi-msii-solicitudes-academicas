@@ -35,6 +35,8 @@ grabación. Los criterios técnicos pueden verificarse localmente por separado.
 | CR02 | Mypy detectó incompatibilidades de tipos locales al construir el prototipo | Precisar el diccionario nueva y la variable opcional de búsqueda. Verificado con mypy antes de fijar estado-inicial. Commit 9428229 |
 | CR03 | Una escritura directa podría truncar el archivo | RepositorioJson usa temporal y reemplazo; test_fallo_de_reemplazo_preserva_archivo_y_limpia_temporal comprueba datos y limpieza |
 | CR04 | Un JSON mal formado no debe interpretarse como repositorio vacío | Validar estructura, enums, IDs y referencias; rechazar con ErrorPersistencia sin sobrescribir. Verificado con archivos inválidos |
+| CR05 | La revisión de estándares detectó que una Solicitud construida directamente con ID cero o referencias inválidas podía guardarse en JSON y no volver a leerse | Validar invariantes en Solicitud.__post_init__, reutilizarlas al cargar JSON y probar construcción inválida. Se elimina la duplicación de reglas del deserializador |
+| CR06 | La revisión de especificación detectó que el informe tenía salidas textuales pero no capturas | Incorporar capturas del panel documental local con fuentes de logs explícitas y sin presentarlo como una GUI del producto |
 
 ## Revisión por dos ejes
 

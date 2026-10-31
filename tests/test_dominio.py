@@ -1,5 +1,5 @@
 import unittest
-from dataclasses import FrozenInstanceError
+from dataclasses import FrozenInstanceError, replace
 
 from solicitudes.dominio import Estado, Prioridad, Solicitud, TipoSolicitud
 
@@ -34,3 +34,21 @@ class ReglasDeEstado(unittest.TestCase):
         self.assertEqual(asignada.responsable_id, 2)
         with self.assertRaises(FrozenInstanceError):
             setattr(actual, "estado", Estado.RESUELTA)
+
+    def test_construccion_rechaza_invariantes_invalidas(self) -> None:
+        valida = self.solicitud(responsable=None)
+        for datos in [
+            {"id": 0},
+            {"id": -1},
+            {"id": True},
+            {"estudiante_id": 99},
+            {"estudiante_id": True},
+            {"asunto": " "},
+            {"responsable_id": 99},
+            {"responsable_id": True},
+            {"estado": Estado.RESUELTA},
+            {"estado": Estado.EN_PROCESO},
+        ]:
+            with self.subTest(datos=datos):
+                with self.assertRaises(ValueError):
+                    replace(valida, **datos)

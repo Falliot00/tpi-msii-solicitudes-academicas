@@ -50,8 +50,8 @@ python tools/verificar.py
 
 El verificador conserva resultados de unittest, mypy estricto sobre la aplicación,
 Ruff lint, formato, preservación de inicial.py y comparación de demos. Usa las
-versiones fijadas en requirements-dev.txt. La suite contiene 39 métodos: los
-mismos 13 casos para cada versión, dos de dominio, seis de repositorios y cinco
+versiones fijadas en requirements-dev.txt. La suite contiene 40 métodos: los
+mismos 13 casos para cada versión, tres de dominio, seis de repositorios y cinco
 de consola. Los subcasos no se cuentan como tests independientes.
 
 Validado con Windows y Python 3.12.14; Python 3.11 no se ejecutó por separado.

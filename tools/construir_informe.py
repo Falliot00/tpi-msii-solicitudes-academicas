@@ -13,6 +13,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
+    Image,
     PageBreak,
     Paragraph,
     Preformatted,
@@ -197,6 +198,12 @@ def main() -> None:
             elementos.append(PageBreak())
         elif linea == "<!-- arquitectura -->":
             elementos.extend([diagrama(normal), Spacer(1, 12)])
+        elif linea in {"<!-- captura_demo -->", "<!-- captura_validacion -->"}:
+            nombre = "captura_demo.png" if "captura_demo" in linea else "captura_validacion.png"
+            captura = Image(str(RAIZ / "docs/evidencias" / nombre))
+            captura.drawHeight = captura.imageHeight * 467 / captura.imageWidth
+            captura.drawWidth = 467
+            elementos.extend([captura, Spacer(1, 9)])
         elif linea == "<!-- validacion -->":
             v = json.loads((RAIZ / "docs/evidencias/validacion.json").read_text(encoding="utf-8"))
             parrafo("Ejecución registrada: " + v["fecha"] + ".")

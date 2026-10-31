@@ -6,8 +6,7 @@ import tempfile
 from pathlib import Path
 from typing import Protocol
 
-from solicitudes.catalogos import ESTUDIANTES, RESPONSABLES
-from solicitudes.dominio import Estado, NuevaSolicitud, Prioridad, Solicitud, TipoSolicitud
+from solicitudes.dominio import Estado, Prioridad, Solicitud, TipoSolicitud
 
 
 class ErrorPersistencia(Exception):
@@ -64,11 +63,7 @@ def _desde_registro(valor: object) -> Solicitud:
     estudiante_id = _entero(valor["estudiante_id"])
     responsable = valor["responsable_id"]
     responsable_id = None if responsable is None else _entero(responsable)
-    if identificador <= 0 or estudiante_id not in {e.id for e in ESTUDIANTES}:
-        raise ValueError("Identificador inválido")
-    if responsable_id is not None and responsable_id not in {r.id for r in RESPONSABLES}:
-        raise ValueError("Responsable inexistente")
-    solicitud = Solicitud(
+    return Solicitud(
         id=identificador,
         estudiante_id=estudiante_id,
         asunto=_texto(valor["asunto"]),
@@ -78,12 +73,6 @@ def _desde_registro(valor: object) -> Solicitud:
         estado=Estado(_texto(valor["estado"])),
         responsable_id=responsable_id,
     )
-    NuevaSolicitud(
-        estudiante_id, solicitud.asunto, solicitud.detalle, solicitud.tipo, solicitud.prioridad
-    ).validar()
-    if solicitud.estado in {Estado.EN_PROCESO, Estado.RESUELTA} and responsable_id is None:
-        raise ValueError("Estado sin responsable")
-    return solicitud
 
 
 class RepositorioJson:

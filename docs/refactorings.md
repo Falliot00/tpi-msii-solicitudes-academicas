@@ -95,6 +95,12 @@ excepciones con un bloque que simule éxito.
 
 ## Límites de las decisiones
 
+La revisión detectó una brecha entre construcción directa y lectura desde JSON.
+Se centralizaron en Solicitud.__post_init__ las invariantes de ID, estudiante,
+asunto, responsable y estado. El deserializador conserva la validación del formato
+y delega las reglas de dominio en la entidad. Una prueba específica verifica que
+una entidad inválida se rechace antes de llegar a cualquiera de los repositorios.
+
 El almacenamiento JSON reescribe el conjunto y usa búsqueda lineal al leer;
 es suficiente para pocos datos locales. El cálculo max(id)+1 y os.replace no
 resuelven concurrencia entre procesos. El reemplazo atómico protege ante fallo

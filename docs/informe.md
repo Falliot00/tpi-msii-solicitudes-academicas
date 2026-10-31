@@ -338,10 +338,10 @@ casos de éxito se complementan con errores, bordes y persistencia.
 |---|---|---|
 | Contrato inicial | Alta, IDs, validaciones, estados, filtros, reporte y archivo | 13 |
 | Mismo contrato final | Mismas expectativas observables | 13 |
-| Dominio | Matriz de estados e inmutabilidad | 2 |
+| Dominio | Matriz, inmutabilidad e invariantes de construcción | 3 |
 | Repositorios | Contrato común, acentos, formatos inválidos y fallo de reemplazo | 6 |
 | Consola e integración | Demos, compatibilidad JSON, errores y precedencia | 5 |
-| Total | Suite completa | 39 |
+| Total | Suite completa | 40 |
 
 Los subcasos de la matriz y los formatos inválidos se ejecutan con subTest;
 no se suman como métodos de prueba independientes para inflar la cantidad.
@@ -394,6 +394,29 @@ tests ni la defensa. El archivo inicial mantiene tipos dinámicos explícitos
 porque es parte del caso diagnosticado; mypy también lo verifica sin omitirlo.
 
 <!-- salto -->
+# 7 Capturas de las evidencias ejecutadas
+
+Las imágenes siguientes son capturas del panel documental local que presenta
+salidas registradas por las herramientas. No representan una interfaz gráfica
+del producto: el sistema se usa mediante consola. Los datos completos originales
+se conservan en los archivos identificados debajo de cada captura.
+
+<!-- captura_demo -->
+
+E07. Comparación del resultado de listar en las demos inicial y refactorizada.
+Fuente: demo_inicial.json y demo_refactorizada.json. Se conserva ID, estado,
+responsable y demás campos observables.
+
+<!-- salto -->
+# 7 Captura de validación
+
+<!-- captura_validacion -->
+
+E08. Resultados del verificador y resumen real de la suite. Fuente:
+validacion.json y suite_completa.txt. Las capturas se tomaron del panel local
+después de ejecutar las comprobaciones; no se dibujaron valores de PASS sin respaldo.
+
+<!-- salto -->
 # 8 Code review profesional
 
 La revisión utiliza un checklist de funcionalidad, diseño, legibilidad, errores,
@@ -407,6 +430,7 @@ humana o una aprobación docente.
 | CR02 Anotaciones locales incompatibles | Tipos precisados antes de fijar el estado inicial validado |
 | CR03 Riesgo de escritura directa | Temporal y reemplazo; destino intacto ante fallo simulado |
 | CR04 JSON inválido podía afectar la operación | Rechazo controlado sin sobrescritura |
+| CR05 Construcción directa permitía una entidad inválida | Invariantes en __post_init__; rechazo antes de persistir y prueba específica |
 
 ## Criterios de aceptación técnica
 

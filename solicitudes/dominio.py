@@ -53,6 +53,10 @@ class NuevaSolicitud:
 
     def validar(self) -> None:
         validar_estudiante_y_asunto(self.estudiante_id, self.asunto)
+        if not isinstance(self.tipo, TipoSolicitud):
+            raise ValueError("Tipo inválido")
+        if not isinstance(self.prioridad, Prioridad):
+            raise ValueError("Prioridad inválida")
 
     @classmethod
     def desde_textos(
@@ -69,7 +73,7 @@ class NuevaSolicitud:
 
 
 def validar_estudiante_y_asunto(estudiante_id: int, asunto: str) -> None:
-    if estudiante_id not in {e.id for e in ESTUDIANTES}:
+    if type(estudiante_id) is not int or estudiante_id not in {e.id for e in ESTUDIANTES}:
         raise ValueError("Estudiante inexistente")
     if not asunto.strip():
         raise ValueError("El asunto es obligatorio")
@@ -96,6 +100,22 @@ class Solicitud:
     prioridad: Prioridad
     estado: Estado = Estado.ABIERTA
     responsable_id: int | None = None
+
+    def __post_init__(self) -> None:
+        if type(self.id) is not int or self.id <= 0:
+            raise ValueError("Identificador inválido")
+        NuevaSolicitud(
+            self.estudiante_id, self.asunto, self.detalle, self.tipo, self.prioridad
+        ).validar()
+        if not isinstance(self.estado, Estado):
+            raise ValueError("Estado inválido")
+        if self.responsable_id is not None:
+            if type(self.responsable_id) is not int or self.responsable_id not in {
+                r.id for r in RESPONSABLES
+            }:
+                raise ValueError("Responsable inexistente")
+        if self.estado in {Estado.EN_PROCESO, Estado.RESUELTA} and self.responsable_id is None:
+            raise ValueError("Estado sin responsable")
 
     def asignar(self, responsable_id: int) -> "Solicitud":
         if responsable_id not in {r.id for r in RESPONSABLES}:
