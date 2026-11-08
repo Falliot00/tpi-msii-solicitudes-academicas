@@ -25,7 +25,7 @@ permite confiar en el comportamiento. Se priorizó la trazabilidad del proceso.
 
 - **Carrera:** Tecnicatura Universitaria en Programación a Distancia.
 - **Materia:** Metodología de Sistemas 2.
-- **Fecha de elaboración:** 31 de octubre de 2026.
+- **Fecha de entrega:** 08/11/2026.
 - **Modalidad:** grupal (2 integrantes).
 
 **Distribución de responsabilidades y roles:**
@@ -620,7 +620,7 @@ El equipo encuadró el uso de herramientas generativas estrictamente dentro del 
 
 ## Validación y control del equipo
 
-Ninguna sugerencia de IA fue incorporada de forma directa sin inspección crítica y comprobación empírica. Todo el código refactorizado fue escrito, auditado y probado por los integrantes en sus máquinas de desarrollo. La estabilidad funcional del prototipo se fundamenta en la ejecución exitosa de los 40 tests automatizados, el análisis de tipos con Mypy (0 errores) y el cumplimiento de estándares PEP 8 con Ruff. La defensa oral se realiza con cámara encendida y voz propia de ambos integrantes.
+Ninguna sugerencia de IA fue incorporada de forma directa sin inspección crítica y comprobación empírica. Todo el código refactorizado fue escrito, auditado y probado por los integrantes en sus máquinas de desarrollo. La estabilidad funcional del prototipo se fundamenta en la ejecución exitosa de los 40 tests automatizados, el análisis de tipos con Mypy (0 errores) y el cumplimiento de estándares PEP 8 con Ruff.
 
 <!-- salto -->
 # 12 Recursos de entrega y referencias
