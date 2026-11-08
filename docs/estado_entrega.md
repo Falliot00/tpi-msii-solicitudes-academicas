@@ -15,5 +15,4 @@ demos y preservación de inicial.py PASS. Revisión técnica entre pares complet
 documentada en docs/code_review.md y validaciones manuales locales en docs/evidencias/validacion_manual.md.
 
 Modalidad y asistencia: Trabajo grupal con uso de IA documentado bajo el marco de la
-Unidad 5 de la cátedra ("La IA como Copiloto"). El enlace al video de defensa grupal
-se adjunta junto a la entrega final en la plataforma según los requerimientos de la cátedra.
+Unidad 5 de la cátedra ("La IA como Copiloto"). Video de defensa grupal: https://youtu.be/wNdm-FbdRmc

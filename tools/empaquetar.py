@@ -31,7 +31,7 @@ def main() -> None:
         "TPI de Fermin Alliot y Gabriel Antuña. Código ejecutable en codigo/.\n"
         "Historial Git: git clone Repositorio.bundle solicitudes-academicas\n"
         "GitHub: https://github.com/Falliot00/tpi-msii-solicitudes-academicas\n"
-        "Video de defensa grupal: enlace adjunto provisto en la entrega de la plataforma.\n"
+        "Video de defensa grupal: https://youtu.be/wNdm-FbdRmc\n"
     ).encode("utf-8")
     hashes = {nombre: hashlib.sha256(datos).hexdigest() for nombre, datos in contenido.items()}
     contenido["MANIFEST_SHA256.json"] = json.dumps(hashes, indent=2, ensure_ascii=False).encode(

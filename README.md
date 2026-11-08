@@ -154,8 +154,8 @@ El informe se guarda en entrega/Alliot_Fermin_TPI_MSII.pdf. Para empaquetar,
 primero completar el cierre de Git. entrega/ está excluida del versionado para
 evitar archivos recursivos y contenido dependiente de su propio commit.
 
-El enlace público de GitHub ya está en config_entrega.json. El enlace del video
-se entrega adjunto en la plataforma según los requisitos de la cátedra.
+Los enlaces del repositorio y del video de defensa están en config_entrega.json.
+Video de defensa: https://youtu.be/wNdm-FbdRmc
 
 ## Autoría y herramientas de asistencia
 
