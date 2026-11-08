@@ -44,8 +44,13 @@ def fuentes() -> tuple[str, str, str]:
     return "Helvetica", "Helvetica-Bold", "Courier"
 
 
+FUENTE_CODIGO = "Courier"
+VINETA = re.compile(r"^(- |\d+\. )")
+
+
 def markup(texto: str) -> str:
-    return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", html.escape(texto))
+    texto = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", html.escape(texto))
+    return re.sub(r"`([^`]+)`", r'<font name="' + FUENTE_CODIGO + r'">\1</font>', texto)
 
 
 def diagrama(fuente: str) -> Drawing:
@@ -95,9 +100,23 @@ def diagrama(fuente: str) -> Drawing:
 
 
 def main() -> None:
+    global FUENTE_CODIGO
     normal, negrita, mono = fuentes()
+    FUENTE_CODIGO = mono
     cuerpo = ParagraphStyle(
         "Cuerpo", fontName=normal, fontSize=10.1, leading=14.5, textColor=AZUL, spaceAfter=9
+    )
+    item_lista = ParagraphStyle(
+        "ItemLista",
+        parent=cuerpo,
+        leftIndent=18,
+        bulletIndent=4,
+        spaceAfter=3,
+        bulletFontName="Helvetica",
+        bulletFontSize=9,
+    )
+    item_numerado = ParagraphStyle(
+        "ItemNumerado", parent=item_lista, bulletFontName=normal, bulletFontSize=10.1
     )
     titulo = ParagraphStyle(
         "Titulo",
@@ -161,6 +180,16 @@ def main() -> None:
     def parrafo(texto: str) -> None:
         elementos.append(Paragraph(markup(texto), cuerpo))
 
+    def item(marcador: str, texto: str) -> None:
+        numerado = marcador != "-"
+        elementos.append(
+            Paragraph(
+                markup(texto),
+                item_numerado if numerado else item_lista,
+                bulletText=marcador if numerado else "•",
+            )
+        )
+
     def tabla(filas: list[list[str]]) -> None:
         n = len(filas[0])
         proporciones = {2: [0.28, 0.72], 3: [0.26, 0.51, 0.23], 4: [0.22, 0.30, 0.24, 0.24]}
@@ -219,7 +248,6 @@ def main() -> None:
                     for n, r in v["resultados"].items()
                 ]
             )
-            parrafo("React Doctor: no corresponde; no hay React ni Next.js.")
         elif linea == "<!-- revision -->":
             ruta = RAIZ / "docs/ia/revision_resultado.json"
             if ruta.exists():
@@ -261,10 +289,6 @@ def main() -> None:
                 parrafo(
                     "Video de defensa: enlace provisto junto a la entrega final en la plataforma de la cátedra / documento anexo."
                 )
-
-            parrafo(
-                "Estado: Repositorio GitHub publicado y paquete de entrega validado técnica y documentalmente."
-            )
         elif linea.startswith("```"):
             bloque = []
             i += 1
@@ -290,13 +314,27 @@ def main() -> None:
             elementos.append(Paragraph(markup(linea[2:]), titulo))
         elif linea.startswith("## "):
             elementos.append(Paragraph(markup(linea[3:]), subtitulo))
-        elif re.match(r"^(- |\d+\. )", linea):
-            parrafo(linea)
+        elif VINETA.match(linea):
+            marcador, texto = linea.split(" ", 1)
+            bloque = [texto]
+            while (
+                i + 1 < len(lineas)
+                and lineas[i + 1].strip()
+                and not VINETA.match(lineas[i + 1].strip())
+                and not lineas[i + 1].startswith(("#", "|", "<!--", "```"))
+            ):
+                i += 1
+                bloque.append(lineas[i].strip())
+            item(marcador, " ".join(bloque))
+            siguiente = next((x.strip() for x in lineas[i + 1 :] if x.strip()), "")
+            if not VINETA.match(siguiente):
+                elementos.append(Spacer(1, 6))
         else:
             bloque = [linea]
             while (
                 i + 1 < len(lineas)
                 and lineas[i + 1].strip()
+                and not VINETA.match(lineas[i + 1].strip())
                 and not lineas[i + 1].startswith(("#", "|", "<!--", "```"))
             ):
                 i += 1

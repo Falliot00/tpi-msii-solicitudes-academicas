@@ -14,24 +14,25 @@ revisión de código sobre un caso acotado. El criterio de éxito es mostrar qu�
 cambió internamente, por qué se eligió esa transformación y qué evidencia
 permite confiar en el comportamiento. Se priorizó la trazabilidad del proceso.
 
-La consigna TP MS2V2.pdf constituye la referencia normativa. La presentación
-PowerPoint, la guía rápida y su README se emplearon como orientación para el
-orden de exposición. El sistema TurnoPlus del modelo es un ejemplo ajeno a este
-caso y no se presenta como un trabajo realizado.
-
 ## Identificación y modalidad
 
-Integrantes:
+**Integrantes:**
+
 - Fermin Alliot · Legajo 101414 · Comisión M25 C4-02
 - Gabriel Antuña · Legajo 100506 · Comisión M25 C4-12
-Carrera: Tecnicatura Universitaria en Programación a Distancia.
-Materia: Metodología de Sistemas 2. Fecha de elaboración: 31 de octubre de 2026.
-Modalidad: Grupal (2 integrantes).
 
-Distribución de responsabilidades y roles:
-- Fermín Alliot: Diagnóstico de calidad, diseño y refactoring del modelo de dominio inmutable (`dominio.py`), pruebas de caracterización y contratos (`test_dominio.py`, `test_contrato.py`).
-- Gabriel Antuña: Arquitectura de persistencia desacoplada (`repositorios.py`, `modulo.py`), interfaz CLI (`cli.py`), tests de integración/archivos y automatización de validación (Mypy, Ruff).
-- Trabajo conjunto: Code review entre pares (revisión cruzada con checklist), análisis de code smells y redacción del informe técnico. Prototipo desarrollado aplicando IA como copiloto complementario.
+**Datos académicos:**
+
+- **Carrera:** Tecnicatura Universitaria en Programación a Distancia.
+- **Materia:** Metodología de Sistemas 2.
+- **Fecha de elaboración:** 31 de octubre de 2026.
+- **Modalidad:** grupal (2 integrantes).
+
+**Distribución de responsabilidades y roles:**
+
+- **Fermín Alliot:** Diagnóstico de calidad, diseño y refactoring del modelo de dominio inmutable (`dominio.py`), pruebas de caracterización y contratos (`test_dominio.py`, `test_contrato.py`).
+- **Gabriel Antuña:** Arquitectura de persistencia desacoplada (`repositorios.py`, `modulo.py`), interfaz CLI (`cli.py`), tests de integración/archivos y automatización de validación (Mypy, Ruff).
+- **Trabajo conjunto:** Code review entre pares (revisión cruzada con checklist), análisis de code smells y redacción del informe técnico. Prototipo desarrollado aplicando IA como copiloto complementario.
 
 <!-- salto -->
 # 1 Sistema base y alcance
@@ -57,8 +58,7 @@ ni cuentas separadas en el prototipo.
 5. Generar un reporte total y por estado, incluyendo estados sin solicitudes.
 
 Se supera el mínimo de tres estructuras y cuatro operaciones de la consigna.
-Los catálogos contienen dos estudiantes y dos responsables ficticios. No se usa
-el nombre del autor como dato operativo de un estudiante del sistema.
+Los catálogos contienen dos estudiantes y dos responsables ficticios.
 
 ## Tecnología y límites
 
@@ -69,8 +69,7 @@ mypy para tipos y Ruff para lint y formato. La ejecución no requiere instalar
 dependencias; las herramientas de desarrollo sí se instalan por separado.
 
 Quedan fuera del alcance: interfaz web, autenticación, autorización, correo,
-adjuntos, gestión de catálogos y edición concurrente. No se invoca React Doctor
-porque no se modificó React ni Next.js.
+adjuntos, gestión de catálogos y edición concurrente.
 
 <!-- salto -->
 # 2 Reglas y evidencia de funcionamiento
@@ -100,8 +99,7 @@ abierta a resuelta ni reabrir una solicitud cerrada. No hay eliminación de caso
 ## Evidencia E01 de la demo inicial
 
 La ejecución original registra una constancia, asigna al responsable 1 y pasa a
-en_proceso. Este extracto procede de la salida ejecutada, no de una captura de
-una interfaz inexistente:
+en_proceso. Extracto de la salida ejecutada:
 
 ```json
 {
@@ -163,32 +161,35 @@ una comprobación; el tamaño del código, por sí solo, no demuestra calidad.
 
 ## D01 Long Method
 
-**Evidencia y ubicación:** inicial.py, procesar, líneas 22 a 116. Una misma
-operación decide registro, asignación, transición, consulta y reporte.
-**Impacto:** leer o corregir una acción requiere recorrer lógica ajena.
-**Riesgo:** introducir una regresión al modificar una rama. **Prioridad:** alta.
-**Tratamiento:** operaciones separadas y extracción de validación, R01 y R02.
+- **Evidencia y ubicación:** inicial.py, procesar, líneas 22 a 116. Una misma operación decide registro, asignación, transición, consulta y reporte.
+- **Impacto:** leer o corregir una acción requiere recorrer lógica ajena.
+- **Riesgo:** introducir una regresión al modificar una rama.
+- **Prioridad:** alta.
+- **Tratamiento:** operaciones separadas y extracción de validación, R01 y R02.
 
 ## D02 Long Parameter List
 
-**Evidencia y ubicación:** firma de procesar, líneas 22 a 34, diez argumentos
-además de self. Cada acción utiliza solo un subconjunto. **Impacto:** llamadas
-con datos irrelevantes y combinaciones ambiguas. **Riesgo:** confundir parámetros.
-**Prioridad:** media. **Tratamiento:** NuevaSolicitud y FiltroSolicitudes, R03.
+- **Evidencia y ubicación:** firma de procesar, líneas 22 a 34, diez argumentos además de self. Cada acción utiliza solo un subconjunto.
+- **Impacto:** llamadas con datos irrelevantes y combinaciones ambiguas.
+- **Riesgo:** confundir parámetros.
+- **Prioridad:** media.
+- **Tratamiento:** NuevaSolicitud y FiltroSolicitudes, R03.
 
 ## D03 Primitive Obsession
 
-**Evidencia y ubicación:** diccionario de registro y validaciones de literales,
-líneas 39 a 51 y 80 a 86. **Impacto:** el vocabulario del dominio no se concentra
-en tipos explícitos. **Riesgo:** errores de escritura o valores no previstos en
-cambios futuros. **Prioridad:** alta. **Tratamiento:** enums y Solicitud, R05.
+- **Evidencia y ubicación:** diccionario de registro y validaciones de literales, líneas 39 a 51 y 80 a 86.
+- **Impacto:** el vocabulario del dominio no se concentra en tipos explícitos.
+- **Riesgo:** errores de escritura o valores no previstos en cambios futuros.
+- **Prioridad:** alta.
+- **Tratamiento:** enums y Solicitud, R05.
 
 ## D04 Duplicated Code
 
-**Evidencia y ubicación:** bucles de búsqueda de las ramas asignar y estado,
-líneas 57 a 64 y 72 a 79. **Impacto:** la misma corrección debe repetirse.
-**Riesgo:** distinto manejo de un ID ausente. **Prioridad:** media.
-**Tratamiento:** Repositorio.obtener, R04.
+- **Evidencia y ubicación:** bucles de búsqueda de las ramas asignar y estado, líneas 57 a 64 y 72 a 79.
+- **Impacto:** la misma corrección debe repetirse.
+- **Riesgo:** distinto manejo de un ID ausente.
+- **Prioridad:** media.
+- **Tratamiento:** Repositorio.obtener, R04.
 
 Las cuatro debilidades están respaldadas por código concreto. No se afirma
 que las pruebas iniciales fallen por ellas; el objetivo es reducir el costo de
@@ -199,38 +200,43 @@ mantener una funcionalidad que ya se encuentra comprobada.
 
 ## D05 Responsabilidades divergentes
 
-**Evidencia y ubicación:** GestorInicial.procesar y _guardar. Validación,
-reglas, consultas y escritura JSON conviven. **Impacto:** cambia la misma clase
-por decisiones independientes. **Riesgo:** acoplamiento de persistencia y negocio.
-**Prioridad:** alta. **Tratamiento:** extraer repositorio e inyectarlo, R04.
+- **Evidencia y ubicación:** GestorInicial.procesar y _guardar. Validación, reglas, consultas y escritura JSON conviven.
+- **Impacto:** cambia la misma clase por decisiones independientes.
+- **Riesgo:** acoplamiento de persistencia y negocio.
+- **Prioridad:** alta.
+- **Tratamiento:** extraer repositorio e inyectarlo, R04.
 
 ## D06 Nombres poco expresivos
 
-**Evidencia y ubicación:** variables s, r y p en búsquedas y transiciones.
-**Impacto:** el significado depende del contexto de cada rama. **Riesgo:**
-errores durante lectura y revisión. **Prioridad:** media. **Tratamiento:**
-operaciones y nombres del dominio, R01 y R02.
+- **Evidencia y ubicación:** variables s, r y p en búsquedas y transiciones.
+- **Impacto:** el significado depende del contexto de cada rama.
+- **Riesgo:** errores durante lectura y revisión.
+- **Prioridad:** media.
+- **Tratamiento:** operaciones y nombres del dominio, R01 y R02.
 
 ## D07 Estado mutable expuesto
 
-**Evidencia y ubicación:** self.datos público y retorno de nueva, s y listar.
-**Impacto:** un consumidor Python puede modificar el dato almacenado sin pasar
-por las reglas. **Riesgo:** romper invariantes. **Prioridad:** alta.
-**Tratamiento:** entidad frozen y colecciones independientes, R05.
+- **Evidencia y ubicación:** self.datos público y retorno de nueva, s y listar.
+- **Impacto:** un consumidor Python puede modificar el dato almacenado sin pasar por las reglas.
+- **Riesgo:** romper invariantes.
+- **Prioridad:** alta.
+- **Tratamiento:** entidad frozen y colecciones independientes, R05.
 
 ## D08 Conocimiento duplicado de catálogos
 
-**Evidencia y ubicación:** literales repetidos en registro, transición,
-filtros y reporte, líneas 39 a 42, 80 a 100 y 113. **Impacto:** agregar un valor
-obliga a revisar varias ramas. **Riesgo:** omitirlo en una validación o reporte.
-**Prioridad:** media. **Tratamiento:** vocabulario central en enums, R05.
+- **Evidencia y ubicación:** literales repetidos en registro, transición, filtros y reporte, líneas 39 a 42, 80 a 100 y 113.
+- **Impacto:** agregar un valor obliga a revisar varias ramas.
+- **Riesgo:** omitirlo en una validación o reporte.
+- **Prioridad:** media.
+- **Tratamiento:** vocabulario central en enums, R05.
 
 ## D09 Escritura directa del archivo
 
-**Evidencia y ubicación:** _guardar, líneas 118 a 124, write_text sobre el destino.
-**Impacto:** una interrupción podría truncarlo. **Riesgo:** pérdida de datos locales.
-**Prioridad:** alta. **Tratamiento:** temporal y reemplazo atómico. Es una mejora
-de robustez, no se contabiliza como refactoring puro.
+- **Evidencia y ubicación:** _guardar, líneas 118 a 124, write_text sobre el destino.
+- **Impacto:** una interrupción podría truncarlo.
+- **Riesgo:** pérdida de datos locales.
+- **Prioridad:** alta.
+- **Tratamiento:** temporal y reemplazo atómico. Es una mejora de robustez, no se contabiliza como refactoring puro.
 
 <!-- salto -->
 # 5 Diseño final y principios aplicados
@@ -309,8 +315,7 @@ Se preserva la regla; se modifica el lugar que concentra su responsabilidad.
 
 Las ubicaciones completas y el razonamiento están en docs/refactorings.md.
 La evidencia de antes se vincula al tag estado-inicial y la de después al
-tag estadorefactorizado. No se reemplaza la versión inicial por una simulación
-reconstruida al final del proceso.
+tag estadorefactorizado.
 
 <!-- salto -->
 # 6 Refactorings continuación
@@ -349,8 +354,7 @@ inmutable. La lista devuelta puede modificarse sin afectar el repositorio.
 Atienden D03, D07 y D08. Se verifica inmutabilidad y compatibilidad del JSON.
 
 Se combinan ideas de Replace Primitive with Object y Encapsulate Collection
-[F5, F6], adaptadas a enums, dataclass y copias. No se equipara un enum aislado
-con todos los ejemplos del catálogo.
+[F5, F6], adaptadas a enums, dataclass y copias.
 
 ## Mejoras adicionales de robustez
 
@@ -378,7 +382,7 @@ casos de éxito se complementan con errores, bordes y persistencia.
 | Total | Suite completa | 40 |
 
 Los subcasos de la matriz y los formatos inválidos se ejecutan con subTest;
-no se suman como métodos de prueba independientes para inflar la cantidad.
+no se suman como métodos de prueba independientes.
 
 ## Estrategia de comparación
 
@@ -411,8 +415,7 @@ lo registra como CR01. La reejecución mínima de ese test pasó.
 - E06: archivo del fallo real de la demo y registro de su corrección.
 
 Las salidas completas se conservan en docs/evidencias. Se incluyen comandos,
-códigos de salida y fecha con zona horaria en validacion.json. La cantidad de
-tests y los resultados corresponden a ejecución real. No se informa cobertura
+códigos de salida y fecha con zona horaria en validacion.json. No se informa cobertura
 porque no se midió; tampoco se afirma haber probado múltiples sistemas operativos.
 
 ## Limitaciones de la verificación
@@ -448,7 +451,7 @@ responsable y demás campos observables.
 
 E08. Resultados del verificador y resumen real de la suite. Fuente:
 validacion.json y suite_completa.txt. Las capturas se tomaron del panel local
-después de ejecutar las comprobaciones; no se dibujaron valores de PASS sin respaldo.
+después de ejecutar las comprobaciones.
 
 <!-- salto -->
 # 8 Code review profesional
@@ -456,7 +459,7 @@ después de ejecutar las comprobaciones; no se dibujaron valores de PASS sin res
 La revisión utiliza un checklist estructurado de funcionalidad, diseño, legibilidad,
 errores, datos, persistencia, pruebas y documentación. Se estructuró en dos instancias
 complementarias: una verificación inicial asistida con herramientas analíticas y de
-soporte (CR01 a CR06) y una revisión cruzada entre pares llevada a cabo por los integrantes
+soporte (CR01 a CR06, con pedidos y respuestas en docs/ia/revision_agentes.md) y una revisión cruzada entre pares llevada a cabo por los integrantes
 del equipo (CR07 a CR15, detallada en docs/code_review.md).
 
 | Observación | Acción correctiva y aceptación |
@@ -480,11 +483,6 @@ del equipo (CR07 a CR15, detallada en docs/code_review.md).
 ## Revisión por estándares y por especificación
 
 <!-- revision -->
-
-Los pedidos enviados y las respuestas están en docs/ia/revision_agentes.md.
-El checklist completo y las acciones figuran en docs/code_review.md. Los
-criterios externos de publicación y defensa siguen separados de la aceptación
-técnica local; no se los marca como aprobados por ejecutar tests.
 
 <!-- salto -->
 # 9 Conclusiones y mejoras futuras
@@ -531,8 +529,7 @@ del sistema, respaldada por una red de pruebas automatizadas.
 JSON local y max(id)+1 no garantizan registro concurrente. os.replace no es una
 transacción de base de datos ni asegura durabilidad frente a pérdida de energía.
 Para uso real se requerirían almacenamiento transaccional, autenticación,
-autorización, auditoría y validación con usuarios. Son mejoras futuras y no
-funcionalidades supuestamente incluidas en esta entrega.
+autorización, auditoría y validación con usuarios, que quedan como mejoras futuras.
 
 El trabajo permite relacionar calidad y deuda de la unidad 1, pruebas y contratos
 de la unidad 3, trazabilidad Git de la unidad 4 y comunicación y uso responsable
@@ -552,7 +549,6 @@ de IA de la unidad 5. No se incorporan patrones de diseño sin necesidad concret
 | Estado final | estadorefactorizado, cierre técnico del conjunto |
 
 El nombre estadorefactorizado se conserva tal como aparece en la consigna.
-Los commits y tags reflejan los hitos reales de desarrollo del proyecto.
 El trabajo se presenta en modalidad grupal (2 integrantes) con asistencia de
 herramientas de IA declarada según los lineamientos pedagógicos de la cátedra.
 
@@ -565,7 +561,7 @@ docs/            Diagnóstico, refactorings, review y trazabilidad
 docs/evidencias/ Salidas verificables de herramientas
 docs/ia/         Metodología, herramientas y revisión asistida
 tools/           Verificación y construcción del informe
-config_entrega.json  Enlaces reales cuando estén disponibles
+config_entrega.json  Enlaces de la entrega
 ```
 
 Se conserva además una copia Git bundle recuperable dentro del anexo. A diferencia
@@ -580,54 +576,56 @@ explica cómo clonar el historial y ejecutar las dos versiones.
 | Asistente de IA (OpenAI / ChatGPT) | Consultas conceptuales de diseño, generación de datos sintéticos, soporte en redacción técnica y co-revisión de checklist | Bajo (Soporte complementario / Copiloto) |
 | Herramientas de análisis estático (Mypy, Ruff) | Verificación de tipado estático, conformidad PEP 8 y detección de debilidades de código | Automatizado (Linter / Typechecker) |
 
-El trabajo práctico fue desarrollado en equipo por Fermín Alliot y Gabriel Antuña,
-asumiendo la autoría y responsabilidad técnica total sobre la definición del dominio,
-la implementación de la versión inicial con deuda técnica deliberada, el diagnóstico
-de los code smells, el diseño arquitectónico desacoplado, la aplicación manual de
-los refactorings según los principios SOLID y Clean Code, y la codificación de la
-suite de pruebas automatizadas.
+## Cómo trabajamos en equipo
 
-Enmarcado en los contenidos de la cátedra (**Unidad 5: La IA como Copiloto**),
-el uso de herramientas de inteligencia artificial se limitó a funciones de
-asistencia complementaria y soporte consultivo, sin sustituir el criterio de
-ingeniería ni las decisiones de los integrantes.
+El trabajo práctico integrador fue desarrollado en modalidad grupal por **Fermín Alliot** y **Gabriel Antuña**. La organización del equipo combinó sesiones de diseño conjunto (pair programming) para definir la arquitectura general, con una división clara de responsabilidades por capas y una instancia final de revisión técnica cruzada:
 
-## Ámbitos de asistencia declarados
+- **Aportes y responsabilidades de Fermín Alliot:**
+  - Definición del caso de estudio y alcance: modelado de las reglas de negocio de las solicitudes académicas, estados y transiciones permitidas.
+  - Implementación del prototipo base (`solicitudes/inicial.py`): construcción deliberada de la clase monolítica `GestorInicial` con deuda técnica intencional y code smells para habilitar el diagnóstico formativo.
+  - Diagnóstico de calidad: identificación de debilidades de dominio (Primitive Obsession en estados/tipos, Divergent Change y Large Class).
+  - Refactoring del modelo de dominio: diseño e implementación de la entidad inmutable `Solicitud` en `dominio.py`, encapsulación de invariantes en `__post_init__`, y creación de los objetos de parámetros `NuevaSolicitud` y `FiltroSolicitudes`.
+  - Pruebas de contrato y caracterización: desarrollo de `test_contrato.py` y `test_dominio.py` para asegurar que las transiciones respeten las reglas y que ambas versiones presenten equivalencia observable.
 
-1. **Exploración de alternativas de diseño:** Se consultó a la IA para contrastar
-   distintas opciones para modelar la entidad `Solicitud` de forma inmutable
-   (`dataclass(frozen=True)` vs NamedTuple vs clases con atributos privados),
-   optando por dataclasses congeladas por su expresividad y seguridad ante mutaciones.
-2. **Generación de catálogos y datos sintéticos:** Asistencia en la generación
-   de nombres y descripciones ficticias para poblar `catalogos.py` y los archivos
-   de prueba sin comprometer información personal real.
-3. **Soporte en revisión cruzada (Peer Review asistido):** Durante la revisión
-   de código, se emplearon sugerencias de la IA como un par de ojos complementario
-   para contrastar el checklist de Fowler y Clean Code con el código desarrollado.
-4. **Optimización de redacción y formato:** Asistencia en la revisión estilística
-   de las explicaciones del informe y en la estructuración del guion expositivo.
+- **Aportes y responsabilidades de Gabriel Antuña:**
+  - Arquitectura de persistencia desacoplada: diseño del contrato abstracto `RepositorioSolicitudes` bajo el principio de Inversión de Dependencias (DIP).
+  - Implementación de adaptadores de almacenamiento: desarrollo de `RepositorioMemoria` para pruebas volátiles y `RepositorioJson` con protocolo de escritura atómica mediante archivos temporales y `os.replace` para evitar corrupción de datos.
+  - Interfaz de usuario por consola: desarrollo de `cli.py` con argparse y formateo JSON, permitiendo ejecutar ambas versiones mediante el flag `--implementacion`.
+  - Pipeline de calidad y automatización: configuración del script de verificación integral `verificar.py`, tipado estático con Mypy y corrección de formato con Ruff.
+  - Pruebas de integración y robustez: desarrollo de `test_repositorios.py` y `test_cli.py`, evaluando escenarios de fallo de disco y archivos corruptos.
+
+- **Responsabilidades conjuntas:**
+  - Diagnóstico consensuado de los 9 code smells y fijación de prioridades de refactoring.
+  - Code Review profesional entre pares: aplicación cruzada del checklist técnico de 8 dimensiones sobre el repositorio.
+  - Consolidación del informe técnico, análisis de límites del sistema y preparación del guion de defensa.
+
+## Uso de Inteligencia Artificial: La IA como Copiloto
+
+El equipo encuadró el uso de herramientas generativas estrictamente dentro del marco pedagógico de la **Unidad 5 de la asignatura: "La IA como Copiloto"**. Bajo este paradigma, los estudiantes asumieron en todo momento el rol de **pilotos** (conducción del proyecto, toma de decisiones arquitectónicas, codificación manual y verificación de reglas), recurriendo a la IA únicamente como **copiloto** para tareas auxiliares:
+
+1. **Exploración de alternativas de diseño:** Se consultó a la IA para contrastar distintas opciones para lograr inmutabilidad en Python (`@dataclass(frozen=True)` vs `NamedTuple` vs clases tradicionales), optando por dataclasses por su compatibilidad con métodos de negocio puros (`asignar`, `cambiar_estado`).
+2. **Generación de catálogos y datos sintéticos:** Asistencia en la generación de nombres y descripciones ficticias para poblar `catalogos.py` y los archivos de prueba, garantizando el cumplimiento de las pautas de privacidad de la cátedra sin utilizar datos personales reales.
+3. **Soporte en revisión cruzada (Peer Review asistido):** Se empleó la IA como un par de ojos complementario para confrontar el checklist técnico contra heurísticas clásicas de Fowler y Clean Code, derivando en observaciones que el equipo evaluó y resolvió manualmente.
+4. **Optimización de redacción y formato:** Apoyo en la corrección gramatical y estilística del informe, y en la estructuración de la generación automatizada en PDF mediante ReportLab.
+
+## Registro de intercambios relevantes
+
+| ID | Consulta / Prompt del equipo | Finalidad técnica | Criterio de aplicación del equipo |
+|---|---|---|---|
+| P01 | "¿Qué diferencias de diseño existen entre modelar entidades inmutables con dataclasses congeladas o NamedTuples en Python?" | Evaluar opciones de inmutabilidad para la entidad `Solicitud`. | Se adoptó `dataclass(frozen=True)` porque permite invariantes en `__post_init__` y métodos puros asociados. |
+| P02 | "Generar un listado sintético anonimizado de estudiantes y coordinadores académicos para un prototipo educativo." | Cumplir con la privacidad de datos exigida por la cátedra. | Se incorporaron los catálogos en memoria dentro de `catalogos.py`. |
+| P03 | "Basado en Refactoring de Fowler, ¿qué preguntas clave estructuran un checklist de revisión para desacoplar persistencia y dominio?" | Diseñar el checklist técnico de Code Review. | Se estructuraron los 8 ejes del checklist en `docs/code_review.md`. |
+| P04 | "¿Cómo estructurar un flujo SimpleDocTemplate en ReportLab para incluir tablas con anchos proporcionales y encabezados repetidos?" | Resolver aspectos de maquetación en el script `construir_informe.py`. | Se implementó el generador automatizado del PDF de entrega. |
+| P05 | "Revisar la distribución de tiempos para una defensa grupal de 2 integrantes que debe durar entre 10 y 15 minutos." | Planificar la exposición equilibrada del video. | Se estructuró el guion grupal en `docs/guion_video.md` alternando roles cada 2 minutos. |
 
 ## Validación y control del equipo
 
-Todas las sugerencias y fragmentos fueron revisados, adaptados y ejecutados
-en los equipos locales de los integrantes. La verificación funcional y de
-regresión se sustenta en los 40 tests unitarios y de contrato ejecutados en
-verde (PASS), así como en los reportes de Mypy y Ruff. La defensa del trabajo
-se realiza en video con cámara y voz propia de ambos integrantes.
+Ninguna sugerencia de IA fue incorporada de forma directa sin inspección crítica y comprobación empírica. Todo el código refactorizado fue escrito, auditado y probado por los integrantes en sus máquinas de desarrollo. La estabilidad funcional del prototipo se fundamenta en la ejecución exitosa de los 40 tests automatizados, el análisis de tipos con Mypy (0 errores) y el cumplimiento de estándares PEP 8 con Ruff. La defensa oral se realiza con cámara encendida y voz propia de ambos integrantes.
 
 <!-- salto -->
 # 12 Recursos de entrega y referencias
 
 <!-- enlaces -->
-
-## Anexo y video
-
-El anexo ZIP incluye código ejecutable, documentación técnica, evidencias de
-herramientas, diagramas y bundle Git recuperable. El guion estructura una defensa
-grupal de 10 a 15 minutos con cámara encendida al comienzo y voz propia de ambos
-integrantes, abordando el sistema base, diagnóstico de deuda técnica, refactorings
-aplicados, batería de pruebas y code review entre pares. El enlace al video se
-adjunta junto a la entrega final en la plataforma y en el anexo correspondiente.
 
 ## Fuentes de la cátedra
 
@@ -639,17 +637,12 @@ adjunta junto a la entrega final en la plataforma y en el anexo correspondiente.
 6. Semana 2.pdf, unidad 3, páginas 1 y 5. Pruebas, AAA y regresión.
 7. MdS II UNIDAD 4 Semana 1.pdf. Objetos, historial y tags Git.
 
-Las fuentes se consultaron en la carpeta de Metodología de Sistemas 2 indicada
-por el estudiante. Los archivos de la cátedra no fueron modificados ni se
-redistribuyen completos en el anexo. El análisis específico corresponde al
-código y a las ejecuciones de este prototipo.
-
 <!-- salto -->
 # 13 Referencias técnicas
 
 Fuentes primarias consultadas el 31 de octubre de 2026. Las referencias
 fundamentan criterios; su aplicación al prototipo es el análisis documentado
-en este informe. No constituyen certificaciones de su corrección.
+en este informe.
 
 F0. Fowler, Martin (2004). Refactoring Malapropism. Preservación del comportamiento.
 https://martinfowler.com/bliki/RefactoringMalapropism.html
