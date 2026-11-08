@@ -1,149 +1,153 @@
-# Guion para la defensa individual
+# Guion para la defensa grupal
 
-Fermin Alliot, legajo 101414, comisión M25 C4-02. Duración prevista: 12 a 14
-minutos, incluyendo ejecución en vivo. El tiempo es una planificación, no una
-grabación realizada. Usar cámara al inicio y voz propia durante toda la defensa.
-Adaptar la redacción a la forma personal de explicar y ensayar los comandos.
+Integrantes:
+- **Fermín Alliot** · Legajo 101414 · Comisión M25 C4-02
+- **Gabriel Antuña** · Legajo 100506 · Comisión M25 C4-12
 
-## 00:00 a 00:45 Presentación con cámara
+Duración prevista: 12 a 14 minutos. Ambos integrantes se presentan con cámara encendida
+al inicio y utilizan voz propia a lo largo de toda la exposición.
 
-"Soy Fermin Alliot, legajo 101414, de la comisión M25 C4-02 de la Tecnicatura
-Universitaria en Programación a Distancia. Presento mi Trabajo Práctico Integrador
-de Metodología de Sistemas II. El trabajo analiza un prototipo de solicitudes
-académicas para mejorar su calidad interna y verificar su comportamiento."
+---
 
-Mostrar portada. Explicar que el trabajo es individual y describir el uso de
-IA en la implementación, las pruebas y la documentación, según la declaración
-del informe. Presentar con palabras propias las decisiones que se van a defender.
+## 00:00 a 00:50 Presentación con cámara (Ambos integrantes)
 
-## 00:45 a 02:00 Caso y alcance
+**Fermín Alliot:**  
+"Buenas tardes. Mi nombre es Fermín Alliot, legajo 101414, de la comisión M25 C4-02 de la
+Tecnicatura Universitaria en Programación a Distancia."
 
-"El sistema permite registrar una solicitud, asignar un responsable, cambiar su
-estado, buscar por filtros y obtener un reporte. Usa estudiantes y responsables
-ficticios. Se utiliza una consola y almacenamiento local para concentrar el
-trabajo en diseño y verificación. El prototipo no tiene autenticación ni usuarios
-simultáneos. Las tres estructuras principales son Estudiante, Responsable y
-Solicitud. El estado inicial existe en Git y se puede ejecutar por separado."
+**Gabriel Antuña:**  
+"Y mi nombre es Gabriel Antuña, legajo 100506, de la comisión M25 C4-12. Juntos presentamos
+nuestro Trabajo Práctico Integrador para Metodología de Sistemas II."
 
-Mostrar README y ejecutar:
+**Fermín Alliot:**  
+"El trabajo aborda el análisis y evolución de un sistema de solicitudes académicas, partiendo
+de un prototipo con funcionamiento externo pero con severos problemas de diseño interno,
+aplicando diagnóstico de deuda técnica, principios SOLID, Clean Code, refactoring seguro,
+una suite de pruebas de regresión y una revisión técnica entre pares."
 
+---
+
+## 00:50 a 02:20 Caso, alcance y sistema base (Fermín Alliot)
+
+**Fermín Alliot:**  
+"El sistema permite a un operador registrar solicitudes de estudiantes, asignarlas a
+responsables de área, transicionar sus estados, filtrar listados y generar reportes simples.
+Para concentrarnos en la calidad del diseño y la verificación sin dependencias complejas,
+utilizamos almacenamiento local estructurado y catálogos sintéticos de estudiantes y áreas."
+
+*(Mostrar README y ejecutar en consola):*
 ```console
 python -m solicitudes catalogos
 python -m solicitudes --implementacion inicial demo
 ```
 
-Señalar el ID, el responsable y el estado en_proceso, junto al reporte total 1.
+"Vemos que el sistema base responde y realiza las operaciones. Sin embargo, si miramos
+el código en `solicitudes/inicial.py` correspondiente al tag `estado-inicial`, encontramos
+que una única clase `GestorInicial` concentra la validación de argumentos, las transiciones de
+estados, el formateo y la escritura en archivo JSON."
 
-## 02:00 a 03:20 Calidad externa e interna
+---
 
-"Desde la mirada del operador, el prototipo registra y consulta correctamente
-los casos comprobados. Eso no alcanza para afirmar que su estructura sea fácil
-de mantener. En GestorInicial, procesar reúne cinco operaciones y recibe diez
-argumentos. También contiene validaciones, reglas de estado y escritura JSON.
-Cambiar la persistencia obliga a editar el mismo módulo que las reglas."
+## 02:20 a 04:00 Calidad externa vs interna y Code Smells (Gabriel Antuña)
 
-Abrir solicitudes/inicial.py y docs/diagnostico.md. Mostrar el tag estado-inicial.
-Explicar que los resultados funcionales se apoyan en pruebas, sin afirmar que
-hubo una evaluación de usabilidad con usuarios reales.
+**Gabriel Antuña:**  
+"Esta discrepancia ilustra el núcleo de la materia: **calidad externa versus calidad interna**.
+Desde el punto de vista del usuario, el sistema 'funciona'. Pero desde el punto de vista del
+mantenimiento, la estructura interna eleva drásticamente el costo del cambio.
 
-## 03:20 a 05:00 Deuda técnica y smells
+En el diagnóstico inicial identificamos 9 debilidades técnicas principales:
+1. **Long Method / Large Class:** El método `procesar` recibía 10 parámetros y ejecutaba 5 casos de uso.
+2. **Primitive Obsession:** Estados y tipos de trámites representados por strings dispersos sin validación formal.
+3. **Repeated Switch:** Condicionales en cascada para evaluar comandos y estados en múltiples lugares.
+4. **Data Clumps:** Parámetros como asunto, detalle, tipo y prioridad viajaban siempre juntos sin encapsular.
+5. **Divergent Change:** Modificar la estructura del JSON o agregar una regla de negocio obligaba a editar la misma clase.
 
-"Se registraron nueve debilidades. Para cada una se documentó evidencia, ubicación,
-impacto, riesgo y prioridad. Los ejemplos más claros son el método con varias
-responsabilidades, los parámetros excesivos, la búsqueda repetida, las cadenas
-que representan estados y la colección mutable expuesta. Se priorizó proteger
-las reglas y el almacenamiento antes de ampliar funcionalidades."
+Priorizamos corregir la fragilidad del modelo de dominio y el acoplamiento de la persistencia
+antes de considerar extensiones funcionales."
 
-Mostrar D01, D04, D07 y D09. Explicar un costo concreto: agregar un estado exige
-revisar transición, filtro y reporte en el código inicial. No leer toda la tabla.
+---
 
-## 05:00 a 07:20 Refactorings y principios
+## 04:00 a 06:30 Refactorings y principios SOLID (Fermín Alliot)
 
-"Se aplicó Extract Method para aislar validación, se reubicaron las transiciones
-en Solicitud y se introdujeron NuevaSolicitud y FiltroSolicitudes como objetos de
-parámetros. Se extrajeron los repositorios y se agruparon los estados en enums.
-Solicitud es inmutable, por lo que una operación devuelve un nuevo valor."
+**Fermín Alliot:**  
+"Para resolver esta deuda técnica aplicamos un proceso de refactoring seguro documentado en 5 pasos:
+1. **Extract Method:** Aislamos las validaciones de invariantes y las reglas de transición.
+2. **Move Method y Creación del Dominio:** Creamos `Solicitud` en `solicitudes/dominio.py` como una
+   entidad inmutable (`@dataclass(frozen=True)`). Ahora es la propia entidad la que protege sus invariantes
+   y resuelve las transiciones de estado mediante métodos puros como `asignar()` o `cambiar_estado()`.
+3. **Introduce Parameter Object:** Introdujimos `NuevaSolicitud` y `FiltroSolicitudes` para agrupar
+   datos cohesivos y eliminar la dispersión de parámetros.
+4. **Enums de Dominio:** Centralizamos estados (`EstadoSolicitud`), tipos y prioridades para garantizar
+   seguridad en tiempo de diseño.
 
-Mostrar solicitudes/dominio.py, modulo.py y repositorios.py. Seguir un cambio
-de estado desde el módulo hasta la entidad. Usar docs/refactorings.md como apoyo.
-Relacionar las transformaciones con Fowler y la separación de responsabilidades
-con Martin, según docs/referencias_tecnicas.md. Explicar la aplicación al código.
+Esto aplica directamente el principio de **Responsabilidad Única (SRP)**: el dominio conoce
+únicamente las reglas del negocio y no sabe si se persiste en memoria o en disco."
 
-"SRP separa reglas, coordinación, persistencia y consola. DIP aparece porque
-el módulo recibe el contrato de repositorio. Los adaptadores de memoria y JSON
-permiten comprobar sustitución dentro de ese contrato. OCP se aplica a cambiar
-el almacenamiento sin editar reglas. No significa que agregar cualquier regla
-no requiera modificar código. La interfaz tiene solo tres operaciones usadas."
+---
 
-## 07:20 a 09:30 Pruebas y demostración
+## 06:30 a 09:00 Persistencia desacoplada y Suite de Pruebas (Gabriel Antuña)
 
-Ejecutar en una carpeta de datos nueva para la grabación:
+**Gabriel Antuña:**  
+"En la capa de persistencia aplicamos el principio de **Inversión de Dependencias (DIP)**:
+`ModuloSolicitudes` no depende de archivos concretos, sino de la interfaz abstracta `RepositorioSolicitudes`.
+Implementamos dos adaptadores: `RepositorioMemoria` (ideal para tests rápidos) y `RepositorioJson`
+con escritura atómica mediante archivos temporales y reemplazo seguro, protegiendo los datos
+ante fallos imprevistos.
 
+Para verificar que ninguna refactorización alteró el comportamiento externo, construimos
+una batería de **40 pruebas automatizadas** bajo el patrón Arrange-Act-Assert:
+- Pruebas de caracterización que evalúan indistintamente la versión inicial y la refactorizada.
+- Pruebas de matriz de estados que comprueban las 16 combinaciones posibles de transición.
+- Pruebas de fallo simulado y archivos corruptos."
+
+*(Ejecutar en vivo):*
 ```console
-python -m solicitudes --archivo datos/defensa.json registrar --estudiante 1 --asunto "Constancia para beca" --detalle "Ciclo 2026" --tipo constancia --prioridad alta
-python -m solicitudes --archivo datos/defensa.json estado 1 en_proceso
-python -m solicitudes --archivo datos/defensa.json asignar 1 1
-python -m solicitudes --archivo datos/defensa.json estado 1 en_proceso
-python -m solicitudes --archivo datos/defensa.json listar --estado en_proceso --prioridad alta
-python -m solicitudes --archivo datos/defensa.json estado 1 resuelta
-python -m solicitudes --archivo datos/defensa.json reporte
 python -m unittest discover -s tests -v
+python -m mypy
+python -m ruff check .
 ```
 
-Si defensa.json ya contiene datos, usar otra ruta nueva y tomar el ID que
-devuelva registrar. El primer cambio de estado debe rechazarse porque falta
-responsable. Señalar que ese rechazo es el comportamiento esperado.
+"Vemos que las 40 pruebas pasan en verde y las comprobaciones de tipos estáticos y linter
+confirman la integridad del sistema."
 
-"Las 13 pruebas de caracterización se aplican a ambas versiones. También se
-verifican los 16 pares de estados, el contrato de almacenamiento, compatibilidad
-del JSON, errores y conservación del archivo cuando falla el reemplazo.
-Los resultados y comandos ejecutados están en docs/evidencias."
+---
 
-No decir que los tests garantizan ausencia de errores ni inventar cobertura.
+## 09:00 a 11:00 Code Review cruzado, Trazabilidad e IA (Ambos)
 
-## 09:30 a 11:00 Code review y trazabilidad
+**Fermín Alliot:**  
+"Llevamos a cabo un **Code Review profesional entre pares** utilizando un checklist de 8 dimensiones
+(funcionalidad, diseño, errores, persistencia, contratos, etc.). Como revisores cruzados, analizamos
+aspectos como la consistencia de nombres, la duplicación justificada en `__post_init__` y la
+preservación absoluta del archivo `inicial.py`, lo cual verificamos mediante Git."
 
-Mostrar docs/code_review.md, docs/trazabilidad.md y:
-
+*(Ejecutar en consola):*
 ```console
 git log --oneline --decorate
-git tag --list
-git diff estado-inicial estadorefactorizado -- solicitudes
+git diff estado-inicial estadorefactorizado -- solicitudes/inicial.py
 ```
 
-"El checklist cubre reglas, errores, encapsulación, persistencia, pruebas y
-documentación. La revisión técnica asistida por IA registró observaciones y
-acciones. No la presento como revisión de un compañero humano. Cada hito tiene
-un tag y se conserva el archivo inicial para comparar."
+**Gabriel Antuña:**  
+"Respecto al uso de Inteligencia Artificial, encuadramos la experiencia bajo los contenidos
+de la **Unidad 5 de la cátedra: 'La IA como Copiloto'**. Como equipo asumimos el rol de pilotos en
+la arquitectura, programación y validación. La IA se empleó de manera complementaria para explorar
+alternativas sintácticas de inmutabilidad, generar catálogos sintéticos y estructurar el checklist
+de revisión técnica."
 
-Explicar un hallazgo real del registro de revisión y la corrección comprobada.
+---
 
-## 11:00 a 12:30 Conclusiones y límites
+## 11:00 a 13:00 Conclusiones y cierre (Ambos)
 
-"El resultado principal es que las reglas quedan localizadas y se pueden
-probar mediante una interfaz pequeña. El sistema conserva las operaciones
-comprobadas y mejora la protección del archivo. El límite más importante es
-que JSON local no admite concurrencia segura: max(id)+1 y el reemplazo de
-archivo no equivalen a una transacción de base de datos."
+**Fermín Alliot:**  
+"Como conclusión técnica, este trabajo me demostró que el refactoring no consiste en reescribir
+código por gusto estético, sino en transformaciones metódicas respaldadas por pruebas que reducen
+el costo del cambio sin alterar el comportamiento. Encapsular la entidad de dominio permitió que el
+sistema sea predecible y robusto."
 
-Explicar con palabras propias una dificultad concreta y un aprendizaje que
-realmente se haya comprendido. Proponer como trabajo futuro una base de datos
-con transacciones y autenticación, si el sistema fuera a usarse de verdad.
+**Gabriel Antuña:**  
+"Por mi parte, destaco la importancia del desacoplamiento de capas y el uso de contratos. Poder
+cambiar el motor de persistencia sin tocar las reglas de negocio demuestra el valor real de los
+principios SOLID en proyectos profesionales. Como trabajo futuro, para un entorno productivo
+quedaría incorporar concurrencia mediante base de datos relacional y autenticación de usuarios."
 
-## Preparación y publicación
-
-- Ensayar desde una copia del repositorio, verificar pantalla legible y audio.
-- Estudiar por qué una transición se acepta o rechaza y cómo se conserva JSON.
-- Grabar con voz propia. No usar síntesis de voz ni un avatar como defensa.
-- Subir el video, comprobar acceso y colocar su URL en config_entrega.json.
-- La URL GitHub ya está cargada. Comprobar su acceso y regenerar informe y anexo al agregar el video.
-
-## Preguntas para practicar
-
-1. ¿Por qué un sistema que funciona puede tener deuda técnica?
-2. ¿Cuál es la diferencia entre mover una regla y cambiar su comportamiento?
-3. ¿Qué demuestra la matriz de estados y qué no demuestra?
-4. ¿Cómo se aplica DIP sin una base de datos real?
-5. ¿Qué sucede si dos procesos registran al mismo tiempo?
-6. ¿Por qué la escritura atómica es una mejora adicional y no un refactoring puro?
-7. ¿Qué decisiones sugeridas por IA podés justificar y cuáles revisarías?
+**Fermín Alliot:**  
+"Muchas gracias por su atención y quedamos a disposición de la cátedra para responder cualquier pregunta."

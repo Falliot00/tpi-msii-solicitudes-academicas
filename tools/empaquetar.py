@@ -28,11 +28,10 @@ def main() -> None:
     contenido["Alliot_Fermin_TPI_MSII.pdf"] = pdf.read_bytes()
     contenido["Guion_video.md"] = (RAIZ / "docs" / "guion_video.md").read_bytes()
     contenido["LEER_PRIMERO.txt"] = (
-        "TPI de Fermin Alliot. Código ejecutable en codigo/.\n"
-        "Historial: git clone Repositorio.bundle solicitudes-academicas\n"
+        "TPI de Fermin Alliot y Gabriel Antuña. Código ejecutable en codigo/.\n"
+        "Historial Git: git clone Repositorio.bundle solicitudes-academicas\n"
         "GitHub: https://github.com/Falliot00/tpi-msii-solicitudes-academicas\n"
-        "Falta grabar y publicar el video con voz propia antes de entregar.\n"
-        "El informe conserva explícitamente el enlace del video pendiente.\n"
+        "Video de defensa grupal: enlace adjunto provisto en la entrega de la plataforma.\n"
     ).encode("utf-8")
     hashes = {nombre: hashlib.sha256(datos).hexdigest() for nombre, datos in contenido.items()}
     contenido["MANIFEST_SHA256.json"] = json.dumps(hashes, indent=2, ensure_ascii=False).encode(

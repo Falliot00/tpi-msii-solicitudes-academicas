@@ -1,2 +1,2 @@
-$ C:\Users\fermi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m ruff check .
+$ G:\Mi unidad\TUP\2026\Segundo Cuatrimestre\Metodologia de Sistemas 2\TPIntegrador\Alliot_Fermin_TPI_MSII\.venv\Scripts\python.exe -m ruff check .
 All checks passed!

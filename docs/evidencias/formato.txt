@@ -1,2 +1,2 @@
-$ C:\Users\fermi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m ruff format --check .
+$ G:\Mi unidad\TUP\2026\Segundo Cuatrimestre\Metodologia de Sistemas 2\TPIntegrador\Alliot_Fermin_TPI_MSII\.venv\Scripts\python.exe -m ruff format --check .
 17 files already formatted

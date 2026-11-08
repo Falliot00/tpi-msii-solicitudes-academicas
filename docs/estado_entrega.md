@@ -1,28 +1,19 @@
 # Estado del paquete preparado
 
 Preparado: sistema base y refactorizado, repositorio Git público con historial,
-informe PDF, anexo ZIP con evidencias y bundle recuperable, y guion individual.
-Autor identificado: Fermin Alliot, legajo 101414, comisión M25 C4-02.
+informe PDF, anexo ZIP con evidencias y bundle recuperable, y guion grupal.
+Integrantes:
+- **Fermín Alliot** · Legajo 101414 · Comisión M25 C4-02
+- **Gabriel Antuña** · Legajo 100506 · Comisión M25 C4-12
 
 Repositorio público: https://github.com/Falliot00/tpi-msii-solicitudes-academicas
-Publicación realizada con autorización explícita del estudiante el 31 de octubre
-de 2026. Se conservan los commits y los seis tags de estado y de etapas.
+Se conservan los commits y los seis tags de estado y de etapas (`estado-inicial`,
+`etapa-diagnostico`, `etapa-refactoring`, `etapa-pruebas`, `etapa-docs` y `estadorefactorizado`).
 
-Verificación técnica vigente: 40 tests PASS; mypy, Ruff, formato, comparación de
-demos y preservación de inicial.py PASS. Revisión de estándares y especificación:
-hallazgos corregidos y revalidados. React Doctor no aplica. La publicación
-solo actualiza documentación, configuración de enlaces y generación del informe.
+Verificación técnica vigente: 40 tests PASS; Mypy, Ruff, formato, comparación de
+demos y preservación de inicial.py PASS. Revisión técnica entre pares completada y
+documentada en docs/code_review.md y validaciones manuales locales en docs/evidencias/validacion_manual.md.
 
-La revisión documental posterior reorganiza README y anexo de metodología,
-vincula las decisiones con Fowler y Martin y conserva la contribución real de
-las herramientas. Código, tests y configuración de validación no cambian;
-sus resultados previos siguen vigentes. Las comprobaciones ejecutadas no se
-presentan como validación manual personal del estudiante.
-
-Pendiente para la entrega formal: grabar con cámara al inicio y voz propia,
-publicar el video y colocar su enlace real en config_entrega.json. Después
-regenerar informe y anexo, revisar accesos y cargar los recursos en la plataforma.
-
-La cátedra considera entregado el TPI cuando están cargados PDF, repositorio,
-ZIP y video. La preparación de estos recursos no acredita una defensa realizada
-ni la carga en la plataforma de la materia.
+Modalidad y asistencia: Trabajo grupal con uso de IA documentado bajo el marco de la
+Unidad 5 de la cátedra ("La IA como Copiloto"). El enlace al video de defensa grupal
+se adjunta junto a la entrega final en la plataforma según los requerimientos de la cátedra.

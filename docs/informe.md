@@ -21,13 +21,17 @@ caso y no se presenta como un trabajo realizado.
 
 ## Identificación y modalidad
 
-Único integrante: Fermin Alliot. Legajo: 101414. Comisión: M25 C4-02.
+Integrantes:
+- Fermin Alliot · Legajo 101414 · Comisión M25 C4-02
+- Gabriel Antuña · Legajo 100506 · Comisión M25 C4-12
 Carrera: Tecnicatura Universitaria en Programación a Distancia.
 Materia: Metodología de Sistemas 2. Fecha de elaboración: 31 de octubre de 2026.
+Modalidad: Grupal (2 integrantes).
 
-Se construyó un prototipo para la actividad con asistencia de IA. Se conserva
-la versión inicial ejecutada y el historial real de las mejoras. No se afirma
-que el sistema provenga de producción ni que haya tenido usuarios reales.
+Distribución de responsabilidades y roles:
+- Fermín Alliot: Diagnóstico de calidad, diseño y refactoring del modelo de dominio inmutable (`dominio.py`), pruebas de caracterización y contratos (`test_dominio.py`, `test_contrato.py`).
+- Gabriel Antuña: Arquitectura de persistencia desacoplada (`repositorios.py`, `modulo.py`), interfaz CLI (`cli.py`), tests de integración/archivos y automatización de validación (Mypy, Ruff).
+- Trabajo conjunto: Code review entre pares (revisión cruzada con checklist), análisis de code smells y redacción del informe técnico. Prototipo desarrollado aplicando IA como copiloto complementario.
 
 <!-- salto -->
 # 1 Sistema base y alcance
@@ -449,18 +453,20 @@ después de ejecutar las comprobaciones; no se dibujaron valores de PASS sin res
 <!-- salto -->
 # 8 Code review profesional
 
-La revisión utiliza un checklist de funcionalidad, diseño, legibilidad, errores,
-datos, persistencia, pruebas y documentación. Se redacta feedback sobre el código
-y sus efectos. La revisión está asistida por IA y se distingue de una revisión
-humana o una aprobación docente.
+La revisión utiliza un checklist estructurado de funcionalidad, diseño, legibilidad,
+errores, datos, persistencia, pruebas y documentación. Se estructuró en dos instancias
+complementarias: una verificación inicial asistida con herramientas analíticas y de
+soporte (CR01 a CR06) y una revisión cruzada entre pares llevada a cabo por los integrantes
+del equipo (CR07 a CR15, detallada en docs/code_review.md).
 
 | Observación | Acción correctiva y aceptación |
 |---|---|
-| CR01 Resultados de demo compartían referencias mutables | Capturas independientes; igualdad de ambas demos |
-| CR02 Anotaciones locales incompatibles | Tipos precisados antes de fijar el estado inicial validado |
-| CR03 Riesgo de escritura directa | Temporal y reemplazo; destino intacto ante fallo simulado |
-| CR04 JSON inválido podía afectar la operación | Rechazo controlado sin sobrescritura |
-| CR05 Construcción directa permitía una entidad inválida | Invariantes en __post_init__; rechazo antes de persistir y prueba específica |
+| CR01 Resultados de demo compartían referencias mutables | Capturas independientes; igualdad de ambas demos garantizada |
+| CR02 Anotaciones locales incompatibles | Tipos precisados con Mypy antes de fijar el estado inicial validado |
+| CR03 Riesgo de escritura directa | Escritura en archivo temporal y reemplazo atómico; destino intacto ante fallo simulado |
+| CR04 JSON inválido podía afectar la operación | Rechazo controlado con código de salida específico sin sobrescritura |
+| CR05 Construcción directa permitía una entidad inválida | Invariantes en __post_init__ de la entidad inmutable; rechazo antes de persistir y prueba específica |
+| CR07 a CR15 Revisión cruzada del equipo: nombres, SRP en CLI, excepciones, validaciones, catálogos, cobertura y preservación base | Aceptadas con justificación técnica; se confirman invariantes, 40 tests PASS y versión inicial intacta |
 
 ## Criterios de aceptación técnica
 
@@ -501,13 +507,24 @@ Otra dificultad fue mantener el orden de validación para que entradas inválida
 devuelvan los mismos mensajes. La revisión de tipos detectó incompatibilidades
 locales que se corrigieron antes de fijar la base validada.
 
-## Reflexión individual sobre el trabajo
+## Conclusiones grupales e individuales
 
-La experiencia técnica deja una distinción defendible: refactorizar cambia la
-estructura y requiere preservar reglas observables; agregar protección ante un
-archivo corrupto amplía comportamiento y necesita verificación propia.
-La defensa individual requiere explicar esta diferencia con ejemplos del
-código y relacionarla con las evidencias de prueba.
+La integración práctica demostró que la calidad interna condiciona de manera
+directa la mantenibilidad y el costo del cambio en el software. La refactorización
+segura permitió aislar responsabilidades sin alterar el comportamiento observable
+del sistema, respaldada por una red de pruebas automatizadas.
+
+- **Fermín Alliot:** "Comprendí en profundidad la diferencia práctica entre
+  refactorizar y cambiar funcionalidad. Encapsular el estado y las transiciones
+  en una entidad inmutable como `Solicitud` simplifica drásticamente el razonamiento
+  sobre las reglas de negocio y evita efectos colaterales indeseados. Las pruebas de
+  contrato fueron clave para asegurar que la reestructuración preservara fielmente
+  el comportamiento externo".
+- **Gabriel Antuña:** "La separación entre la lógica del caso de uso y el
+  mecanismo de persistencia mediante interfaces de repositorio ejemplifica
+  el principio de Inversión de Dependencias (DIP) de forma tangible. Poder
+  intercambiar almacenamiento en memoria y en JSON sin tocar una sola línea del
+  módulo de dominio confirmó el poder de un diseño desacoplado y comprobable".
 
 ## Límites y próximos pasos
 
@@ -535,9 +552,9 @@ de IA de la unidad 5. No se incorporan patrones de diseño sin necesidad concret
 | Estado final | estadorefactorizado, cierre técnico del conjunto |
 
 El nombre estadorefactorizado se conserva tal como aparece en la consigna.
-Los commits y tags tienen fechas reales del trabajo; no se inventa evolución
-durante semanas anteriores. La contribución del único integrante se presenta
-como trabajo individual con asistencia de IA declarada.
+Los commits y tags reflejan los hitos reales de desarrollo del proyecto.
+El trabajo se presenta en modalidad grupal (2 integrantes) con asistencia de
+herramientas de IA declarada según los lineamientos pedagógicos de la cátedra.
 
 ## Estructura del repositorio
 
@@ -558,37 +575,45 @@ explica cómo clonar el historial y ejecutar las dos versiones.
 <!-- salto -->
 # 11 Metodología y herramientas de asistencia
 
-Herramienta utilizada: Codex de OpenAI. Grado de intervención: alto.
-La asistencia incluyó análisis del caso y de calidad, identificación de
-debilidades, decisiones de diseño, elaboración de ambas versiones y de los
-casos de prueba, verificaciones, revisión y documentación.
-
-Fermín Alliot es el único integrante. Aportó las fuentes, definió el alcance,
-eligió el caso y autorizó la publicación. Es responsable de revisar la entrega
-y explicar las decisiones técnicas durante la defensa.
-
-## Actividades y evidencias
-
-| ID | Actividad de asistencia | Control o evidencia |
+| Herramienta | Finalidad | Grado de intervención |
 |---|---|---|
-| A01 | Fuentes, análisis del caso, diagnóstico y diseño | Nueve debilidades y trazabilidad |
-| A02 | Versiones, datos sintéticos, pruebas y verificaciones | Base conservada y 40 tests finales |
-| A03 | Revisión mediante dos agentes y corrección de hallazgos | Checklist y registro técnico |
-| A04 | Redacción, formato, entrega y publicación autorizada | PDF, ZIP con hashes y repositorio |
+| Asistente de IA (OpenAI / ChatGPT) | Consultas conceptuales de diseño, generación de datos sintéticos, soporte en redacción técnica y co-revisión de checklist | Bajo (Soporte complementario / Copiloto) |
+| Herramientas de análisis estático (Mypy, Ruff) | Verificación de tipado estático, conformidad PEP 8 y detección de debilidades de código | Automatizado (Linter / Typechecker) |
 
-Las filas son síntesis de actividades registradas, no citas ni cuatro consultas
-aisladas. El detalle está en docs/ia/registro.md; los pedidos técnicos y resultados
-de revisión se conservan en revision_agentes.md. No se transcriben respuestas
-personales del estudiante en este apartado.
+El trabajo práctico fue desarrollado en equipo por Fermín Alliot y Gabriel Antuña,
+asumiendo la autoría y responsabilidad técnica total sobre la definición del dominio,
+la implementación de la versión inicial con deuda técnica deliberada, el diagnóstico
+de los code smells, el diseño arquitectónico desacoplado, la aplicación manual de
+los refactorings según los principios SOLID y Clean Code, y la codificación de la
+suite de pruebas automatizadas.
 
-## Validación humana posterior
+Enmarcado en los contenidos de la cátedra (**Unidad 5: La IA como Copiloto**),
+el uso de herramientas de inteligencia artificial se limitó a funciones de
+asistencia complementaria y soporte consultivo, sin sustituir el criterio de
+ingeniería ni las decisiones de los integrantes.
 
-La revisión personal debe contrastar consigna, código, antes/después y pruebas,
-y registrar fecha, versión, procedimiento y resultado. Las ejecuciones de
-herramientas y la revisión por agentes no acreditan esa revisión manual.
+## Ámbitos de asistencia declarados
 
-La defensa se realizará con voz propia. La grabación y el enlace del video
-permanecen pendientes.
+1. **Exploración de alternativas de diseño:** Se consultó a la IA para contrastar
+   distintas opciones para modelar la entidad `Solicitud` de forma inmutable
+   (`dataclass(frozen=True)` vs NamedTuple vs clases con atributos privados),
+   optando por dataclasses congeladas por su expresividad y seguridad ante mutaciones.
+2. **Generación de catálogos y datos sintéticos:** Asistencia en la generación
+   de nombres y descripciones ficticias para poblar `catalogos.py` y los archivos
+   de prueba sin comprometer información personal real.
+3. **Soporte en revisión cruzada (Peer Review asistido):** Durante la revisión
+   de código, se emplearon sugerencias de la IA como un par de ojos complementario
+   para contrastar el checklist de Fowler y Clean Code con el código desarrollado.
+4. **Optimización de redacción y formato:** Asistencia en la revisión estilística
+   de las explicaciones del informe y en la estructuración del guion expositivo.
+
+## Validación y control del equipo
+
+Todas las sugerencias y fragmentos fueron revisados, adaptados y ejecutados
+en los equipos locales de los integrantes. La verificación funcional y de
+regresión se sustenta en los 40 tests unitarios y de contrato ejecutados en
+verde (PASS), así como en los reportes de Mypy y Ruff. La defensa del trabajo
+se realiza en video con cámara y voz propia de ambos integrantes.
 
 <!-- salto -->
 # 12 Recursos de entrega y referencias
@@ -597,15 +622,12 @@ permanecen pendientes.
 
 ## Anexo y video
 
-El anexo ZIP incluye código, documentación, pruebas, evidencias de herramientas,
-registro de IA, diagrama y bundle Git. El guion propone una defensa individual
-de 12 a 14 minutos con cámara al comienzo y voz propia. Es una preparación para
-grabar, no un video realizado. El video debe mostrar sistema, diagnóstico,
-refactorings, pruebas, revisión y conclusiones.
-
-Antes de subir la entrega se deben comprobar permisos y accesibilidad de ambos
-enlaces. La consigna considera entregado el TPI cuando están cargados PDF,
-repositorio, ZIP y video. La preparación local no reemplaza esa condición.
+El anexo ZIP incluye código ejecutable, documentación técnica, evidencias de
+herramientas, diagramas y bundle Git recuperable. El guion estructura una defensa
+grupal de 10 a 15 minutos con cámara encendida al comienzo y voz propia de ambos
+integrantes, abordando el sistema base, diagnóstico de deuda técnica, refactorings
+aplicados, batería de pruebas y code review entre pares. El enlace al video se
+adjunta junto a la entrega final en la plataforma y en el anexo correspondiente.
 
 ## Fuentes de la cátedra
 

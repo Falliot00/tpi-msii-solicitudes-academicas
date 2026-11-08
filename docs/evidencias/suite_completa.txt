@@ -1,4 +1,4 @@
-$ C:\Users\fermi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest discover -s tests -v
+$ G:\Mi unidad\TUP\2026\Segundo Cuatrimestre\Metodologia de Sistemas 2\TPIntegrador\Alliot_Fermin_TPI_MSII\.venv\Scripts\python.exe -m unittest discover -s tests -v
 test_archivo_inicial_es_compatible_con_version_final (test_cli.ConsolaTest.test_archivo_inicial_es_compatible_con_version_final) ... ok
 test_demo_identica_en_ambas_versiones (test_cli.ConsolaTest.test_demo_identica_en_ambas_versiones) ... ok
 test_error_de_dominio_y_sin_escritura (test_cli.ConsolaTest.test_error_de_dominio_y_sin_escritura) ... ok
@@ -41,6 +41,6 @@ test_rechaza_formatos_e_invariantes_invalidos (test_repositorios.JsonTest.test_r
 test_contrato_de_almacenamiento (test_repositorios.MemoriaTest.test_contrato_de_almacenamiento) ... ok
 
 ----------------------------------------------------------------------
-Ran 40 tests in 0.296s
+Ran 40 tests in 0.406s
 
 OK

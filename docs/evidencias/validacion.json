@@ -1,6 +1,6 @@
 {
-  "fecha": "2026-10-31T05:55:14.373180-03:00",
-  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "fecha": "2026-11-08T11:10:22.421607-03:00",
+  "python": "3.14.6 (main, Jul 23 2026, 14:44:54) [MSC v.1944 64 bit (AMD64)]",
   "resultados": {
     "suite_completa": {
       "estado": "PASS",

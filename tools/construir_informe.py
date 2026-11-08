@@ -139,17 +139,22 @@ def main() -> None:
             "Calidad y evolución de un sistema de solicitudes académicas",
             ParagraphStyle("Portada", parent=titulo, fontSize=28, leading=35),
         ),
-        Spacer(1, 35),
-        Paragraph("Fermin Alliot", subtitulo),
-        Paragraph("Legajo 101414<br/>Comisión M25 C4-02", cuerpo),
-        Paragraph("Tecnicatura Universitaria en Programación a Distancia", cuerpo),
         Spacer(1, 28),
+        Paragraph("Integrantes:", subtitulo),
+        Paragraph(
+            "<b>Fermin Alliot</b> · Legajo 101414 · Comisión M25 C4-02<br/><b>Gabriel Antuña</b> · Legajo 100506 · Comisión M25 C4-12",
+            cuerpo,
+        ),
+        Paragraph("Tecnicatura Universitaria en Programación a Distancia", cuerpo),
+        Spacer(1, 24),
         Paragraph(config["fecha_informe"], cuerpo),
-        Spacer(1, 18),
+        Spacer(1, 14),
         Paragraph(
             "Sistema base, diagnóstico, mejoras de diseño, pruebas y revisión técnica", cuerpo
         ),
-        Paragraph("Trabajo individual con asistencia de inteligencia artificial declarada", cuerpo),
+        Paragraph(
+            "Trabajo grupal (2 integrantes) · Asistencia de IA como copiloto declarada", cuerpo
+        ),
         PageBreak(),
     ]
 
@@ -223,30 +228,43 @@ def main() -> None:
             else:
                 parrafo("Revisión por dos ejes pendiente de incorporar al cierre documental.")
         elif linea == "<!-- enlaces -->":
-            for clave, nombre in [
-                ("repositorio_github", "Repositorio GitHub"),
-                ("video", "Video de defensa"),
-            ]:
-                url = config.get(clave)
-                if url:
-                    seguro = html.escape(url, quote=True)
-                    elementos.append(
-                        Paragraph(
-                            nombre + ': <link href="' + seguro + '">' + seguro + "</link>", cuerpo
-                        )
+            repo_url = config.get("repositorio_github")
+            if repo_url:
+                seguro_repo = html.escape(repo_url, quote=True)
+                elementos.append(
+                    Paragraph(
+                        'Repositorio GitHub: <link href="'
+                        + seguro_repo
+                        + '">'
+                        + seguro_repo
+                        + "</link>",
+                        cuerpo,
                     )
-                else:
-                    parrafo(nombre + ": pendiente de publicación y enlace accesible.")
-            if config.get("video"):
-                parrafo(
-                    "Estado: repositorio y video enlazados; verificar accesibilidad antes de entregar."
-                )
-            elif config.get("repositorio_github"):
-                parrafo(
-                    "Estado: repositorio GitHub publicado; falta grabar y publicar el video de defensa."
                 )
             else:
-                parrafo("Estado: recursos locales preparados; faltan publicación y grabación.")
+                parrafo("Repositorio GitHub: disponible en el paquete de entrega.")
+
+            video_url = config.get("video")
+            if video_url:
+                seguro_vid = html.escape(video_url, quote=True)
+                elementos.append(
+                    Paragraph(
+                        'Video de defensa: <link href="'
+                        + seguro_vid
+                        + '">'
+                        + seguro_vid
+                        + "</link>",
+                        cuerpo,
+                    )
+                )
+            else:
+                parrafo(
+                    "Video de defensa: enlace provisto junto a la entrega final en la plataforma de la cátedra / documento anexo."
+                )
+
+            parrafo(
+                "Estado: Repositorio GitHub publicado y paquete de entrega validado técnica y documentalmente."
+            )
         elif linea.startswith("```"):
             bloque = []
             i += 1
@@ -290,7 +308,9 @@ def main() -> None:
         canvas.saveState()
         canvas.setFillColor(colors.HexColor("#607080"))
         canvas.setFont(normal, 8)
-        canvas.drawString(64, 32, "Fermin Alliot · Metodología de Sistemas 2 · TPI")
+        canvas.drawString(
+            64, 32, "Fermin Alliot · Gabriel Antuña · Metodología de Sistemas 2 · TPI"
+        )
         canvas.drawRightString(A4[0] - 64, 32, str(documento.page))
         canvas.restoreState()
 
@@ -304,7 +324,7 @@ def main() -> None:
         topMargin=49,
         bottomMargin=52,
         title="TPI Solicitudes académicas",
-        author="Fermin Alliot",
+        author="Fermin Alliot, Gabriel Antuña",
         subject="Calidad y refactoring seguro",
     )
     documento.build(elementos, onFirstPage=pie, onLaterPages=pie)

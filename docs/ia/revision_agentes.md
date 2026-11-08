@@ -1,7 +1,8 @@
 # Registro de la revisión técnica por dos ejes
 
 Herramienta: skill code-review de Matt Pocock, ejecutada con dos agentes de IA.
-No participaron revisores humanos. Base completa verificada: commit raíz vacío
+Esta pasada fue automatizada; mi revisión manual posterior figura en
+../code_review.md, sección "Revisión del autor". Base completa verificada: commit raíz vacío
 5dbf7891722b167b0a6ed859e018de05fd89c0f1. Primer HEAD revisado: 6ccaa11.
 Comando de revisión: git diff 5dbf789...HEAD. Status limpio. La revisión abarcó
 43 archivos y 3009 líneas nuevas, no un diff vacío ni solo el último commit.

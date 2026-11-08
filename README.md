@@ -1,8 +1,9 @@
 # Solicitudes académicas
 
-Prototipo educativo para el TPI de Metodología de Sistemas II de Fermín Alliot,
-legajo 101414, comisión M25 C4-02. Carrera Tecnicatura Universitaria en Programación
-a Distancia. Datos operativos ficticios.
+Prototipo educativo para el TPI de Metodología de Sistemas II de:
+- **Fermín Alliot** · Legajo 101414 · Comisión M25 C4-02
+- **Gabriel Antuña** · Legajo 100506 · Comisión M25 C4-12
+Carrera Tecnicatura Universitaria en Programación a Distancia. Datos operativos ficticios.
 
 ## Arquitectura y funcionalidades
 
@@ -119,7 +120,7 @@ El archivo inicial permanece idéntico en la versión final.
 
 - [Alcance y reglas](docs/alcance.md).
 - [Diagnóstico de calidad y nueve debilidades](docs/diagnostico.md).
-- [Checklist y resultados de code review](docs/code_review.md).
+- [Checklist, revisión automatizada y revisión del autor](docs/code_review.md).
 - [Informe técnico editable](docs/informe.md) y [guion de defensa](docs/guion_video.md).
 - [Metodología y herramientas de asistencia](docs/ia/registro.md).
 - [Referencias técnicas y aplicación al caso](docs/referencias_tecnicas.md).
@@ -153,17 +154,19 @@ El informe se guarda en entrega/Alliot_Fermin_TPI_MSII.pdf. Para empaquetar,
 primero completar el cierre de Git. entrega/ está excluida del versionado para
 evitar archivos recursivos y contenido dependiente de su propio commit.
 
-El enlace público de GitHub ya está en config_entrega.json. Completar la URL
-real del video y regenerar PDF y ZIP antes de entregar. La
-cátedra exige PDF, repositorio, ZIP y video cargados. El guion de 12 a 14 minutos
-no sustituye grabar con cámara al inicio y voz propia.
+El enlace público de GitHub ya está en config_entrega.json. El enlace del video
+se entrega adjunto en la plataforma según los requisitos de la cátedra.
 
-## Identificación y herramientas de asistencia
+## Autoría y herramientas de asistencia
 
-Fermín Alliot es el único integrante y responsable de presentar y defender la
-entrega. Aportó las fuentes, definió el alcance, eligió el caso y autorizó su
-publicación. La asistencia de Codex incluyó análisis, elaboración del código y
-de los casos de prueba, ejecución de herramientas, revisión y documentación.
-El [anexo de metodología](docs/ia/registro.md) delimita esas actividades y separa
-las comprobaciones registradas de la revisión personal del estudiante. El
-prototipo fue construido para la actividad y utiliza datos operativos sintéticos.
+Trabajo práctico grupal desarrollado por Fermín Alliot y Gabriel Antuña. Los integrantes
+asumieron la autoría completa del diseño, arquitectura, programación del sistema base y
+refactorizado, pruebas y revisión técnica. Se emplearon herramientas de IA exclusivamente
+bajo el marco de la **Unidad 5 de la cátedra: "La IA como Copiloto"** (asistencia complementaria
+en exploración sintáctica, datos sintéticos y soporte estilístico de redacción).
+
+- [Anexo de metodología y herramientas de asistencia](docs/ia/registro.md).
+- [Revisión técnica entre pares (Code Review)](docs/code_review.md).
+- [Validación técnica local del equipo](docs/evidencias/validacion_manual.md).
+
+Los datos de estudiantes y responsables son sintéticos.
