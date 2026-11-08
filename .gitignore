@@ -7,3 +7,4 @@ datos/
 entrega/
 tmp/
 uv.lock
+*.zip

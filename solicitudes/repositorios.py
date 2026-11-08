@@ -28,6 +28,12 @@ class RepositorioSolicitudes(Protocol):
 
 
 class RepositorioMemoria:
+    """Almacenamiento en memoria volátil conforme a RepositorioSolicitudes.
+
+    Permite ejecutar casos de prueba y demostraciones aisladas con alta
+    velocidad y sin efectos colaterales sobre el sistema de archivos.
+    """
+
     def __init__(self) -> None:
         self._solicitudes: dict[int, Solicitud] = {}
 
@@ -76,6 +82,12 @@ def _desde_registro(valor: object) -> Solicitud:
 
 
 class RepositorioJson:
+    """Adaptador de persistencia en archivo JSON conforme a RepositorioSolicitudes.
+
+    Aplica escritura atómica mediante archivos temporales y reemplazo seguro
+    (os.replace) para garantizar la integridad de los datos ante cortes abruptos.
+    """
+
     def __init__(self, archivo: Path) -> None:
         self._archivo = archivo
 

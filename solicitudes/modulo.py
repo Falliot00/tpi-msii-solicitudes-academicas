@@ -12,6 +12,13 @@ class Reporte(TypedDict):
 
 
 class ModuloSolicitudes:
+    """Coordinador de casos de uso para la gestión de solicitudes académicas.
+
+    Aplica el principio de Inversión de Dependencias (DIP) interactuando
+    exclusivamente con la abstracción RepositorioSolicitudes, manteniendo
+    la lógica de negocio desacoplada de los detalles de almacenamiento.
+    """
+
     def __init__(self, repositorio: RepositorioSolicitudes) -> None:
         self._repositorio = repositorio
 
