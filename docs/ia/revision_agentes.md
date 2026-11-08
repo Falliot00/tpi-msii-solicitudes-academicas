@@ -1,8 +1,8 @@
 # Registro de la revisión técnica por dos ejes
 
 Herramienta: skill code-review de Matt Pocock, ejecutada con dos agentes de IA.
-Esta pasada fue automatizada; mi revisión manual posterior figura en
-../code_review.md, sección "Revisión del autor". Base completa verificada: commit raíz vacío
+Esta pasada fue automatizada; la revisión técnica cruzada del equipo figura en
+../code_review.md, sección "Revisión cruzada del equipo". Base completa verificada: commit raíz vacío
 5dbf7891722b167b0a6ed859e018de05fd89c0f1. Primer HEAD revisado: 6ccaa11.
 Comando de revisión: git diff 5dbf789...HEAD. Status limpio. La revisión abarcó
 43 archivos y 3009 líneas nuevas, no un diff vacío ni solo el último commit.
@@ -88,9 +88,9 @@ completa. Repo RAÍZ. Base verificada 5dbf7891722b167b0a6ed859e018de05fd89c0f1
 (raíz vacía), HEAD 6ccaa11. Diff obligatorio: git diff 5dbf789...HEAD; commits
 4680f99,9428229,b72be77,0ed754f,3b5e37b,6ccaa11. Incluir status y cambios
 staged/unstaged/nuevos si existen. Especificación: docs/alcance.md y consigna
-oficial TP MS2V2.pdf (6 páginas). Pedido usuario: TPI completo sistema
-base/refactorizado, informe, anexo y guion; caso solicitudes académicas; único
-integrante Fermin Alliot 101414 comisión M25 C4-02. No pide PPTX ni grabar voces;
+oficial TP MS2V2.pdf (6 páginas). Caso: solicitudes académicas;
+integrantes: Fermín Alliot (legajo 101414, M25 C4-02) y Gabriel Antuña (legajo 100506, M25 C4-12).
+No pide PPTX ni grabar voces;
 Git push/publicación no autorizados. GitHub/video declarados pendientes, config
 URLs null, se preparan localmente. PDF generado en entrega/Alliot_Fermin_TPI_MSII.pdf;
 ZIP se empaquetará al cerrar revisión; tags etapa-docs y estadorefactorizado

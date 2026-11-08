@@ -118,6 +118,7 @@ def main() -> None:
     item_numerado = ParagraphStyle(
         "ItemNumerado", parent=item_lista, bulletFontName=normal, bulletFontSize=10.1
     )
+    item_anidado = ParagraphStyle("ItemAnidado", parent=item_lista, leftIndent=36, bulletIndent=22)
     titulo = ParagraphStyle(
         "Titulo",
         parent=cuerpo,
@@ -161,7 +162,7 @@ def main() -> None:
         Spacer(1, 28),
         Paragraph("Integrantes:", subtitulo),
         Paragraph(
-            "<b>Fermin Alliot</b> · Legajo 101414 · Comisión M25 C4-02<br/><b>Gabriel Antuña</b> · Legajo 100506 · Comisión M25 C4-12",
+            "<b>Fermín Alliot</b> · Legajo 101414 · Comisión M25 C4-02<br/><b>Gabriel Antuña</b> · Legajo 100506 · Comisión M25 C4-12",
             cuerpo,
         ),
         Paragraph("Tecnicatura Universitaria en Programación a Distancia", cuerpo),
@@ -180,15 +181,15 @@ def main() -> None:
     def parrafo(texto: str) -> None:
         elementos.append(Paragraph(markup(texto), cuerpo))
 
-    def item(marcador: str, texto: str) -> None:
+    def item(marcador: str, texto: str, anidado: bool = False) -> None:
         numerado = marcador != "-"
-        elementos.append(
-            Paragraph(
-                markup(texto),
-                item_numerado if numerado else item_lista,
-                bulletText=marcador if numerado else "•",
-            )
-        )
+        if anidado:
+            estilo, vineta = item_anidado, "–"
+        elif numerado:
+            estilo, vineta = item_numerado, marcador
+        else:
+            estilo, vineta = item_lista, "•"
+        elementos.append(Paragraph(markup(texto), estilo, bulletText=vineta))
 
     def tabla(filas: list[list[str]]) -> None:
         n = len(filas[0])
@@ -315,6 +316,7 @@ def main() -> None:
         elif linea.startswith("## "):
             elementos.append(Paragraph(markup(linea[3:]), subtitulo))
         elif VINETA.match(linea):
+            anidado = len(lineas[i]) - len(lineas[i].lstrip()) >= 2
             marcador, texto = linea.split(" ", 1)
             bloque = [texto]
             while (
@@ -325,7 +327,7 @@ def main() -> None:
             ):
                 i += 1
                 bloque.append(lineas[i].strip())
-            item(marcador, " ".join(bloque))
+            item(marcador, " ".join(bloque), anidado)
             siguiente = next((x.strip() for x in lineas[i + 1 :] if x.strip()), "")
             if not VINETA.match(siguiente):
                 elementos.append(Spacer(1, 6))
@@ -347,7 +349,7 @@ def main() -> None:
         canvas.setFillColor(colors.HexColor("#607080"))
         canvas.setFont(normal, 8)
         canvas.drawString(
-            64, 32, "Fermin Alliot · Gabriel Antuña · Metodología de Sistemas 2 · TPI"
+            64, 32, "Fermín Alliot · Gabriel Antuña · Metodología de Sistemas 2 · TPI"
         )
         canvas.drawRightString(A4[0] - 64, 32, str(documento.page))
         canvas.restoreState()
@@ -362,7 +364,7 @@ def main() -> None:
         topMargin=49,
         bottomMargin=52,
         title="TPI Solicitudes académicas",
-        author="Fermin Alliot, Gabriel Antuña",
+        author="Fermín Alliot, Gabriel Antuña",
         subject="Calidad y refactoring seguro",
     )
     documento.build(elementos, onFirstPage=pie, onLaterPages=pie)

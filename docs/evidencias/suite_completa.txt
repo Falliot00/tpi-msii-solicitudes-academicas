@@ -41,6 +41,6 @@ test_rechaza_formatos_e_invariantes_invalidos (test_repositorios.JsonTest.test_r
 test_contrato_de_almacenamiento (test_repositorios.MemoriaTest.test_contrato_de_almacenamiento) ... ok
 
 ----------------------------------------------------------------------
-Ran 40 tests in 0.387s
+Ran 40 tests in 0.376s
 
 OK

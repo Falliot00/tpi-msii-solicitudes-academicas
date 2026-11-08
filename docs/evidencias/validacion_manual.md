@@ -73,7 +73,7 @@ git diff estado-inicial estadorefactorizado -- solicitudes/inicial.py
 
 Esperado: mypy "Success", Ruff "All checks passed!", formato sin archivos a
 reformatear y diff vacío.
-Resultado: PASS. Mypy reportó "Success: no issues found in 13 source files". Ruff reportó "All checks passed!". Formato al 100%. Diff de `inicial.py` vacío (código 0).
+Resultado: PASS. Mypy reportó "Success: no issues found in 8 source files". Ruff reportó "All checks passed!". Formato al 100%. Diff de `inicial.py` vacío (código 0).
 
 ## Observaciones
 

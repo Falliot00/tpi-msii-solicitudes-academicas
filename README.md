@@ -101,7 +101,7 @@ versiones fijadas en requirements-dev.txt. La suite contiene 40 métodos: los
 mismos 13 casos para cada versión, tres de dominio, seis de repositorios y cinco
 de consola. Los subcasos no se cuentan como tests independientes.
 
-Validado con Windows y Python 3.12.14; Python 3.11 no se ejecutó por separado.
+Validado con Windows y Python 3.14.6; Python 3.11 no se ejecutó por separado.
 No se midió cobertura. No hay React/Next.js, por lo que React Doctor no corresponde.
 Los resultados finales están en docs/evidencias/validacion.json.
 

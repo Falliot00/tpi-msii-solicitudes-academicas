@@ -18,7 +18,7 @@ permite confiar en el comportamiento. Se priorizó la trazabilidad del proceso.
 
 **Integrantes:**
 
-- Fermin Alliot · Legajo 101414 · Comisión M25 C4-02
+- Fermín Alliot · Legajo 101414 · Comisión M25 C4-02
 - Gabriel Antuña · Legajo 100506 · Comisión M25 C4-12
 
 **Datos académicos:**
@@ -420,7 +420,7 @@ porque no se midió; tampoco se afirma haber probado múltiples sistemas operati
 
 ## Limitaciones de la verificación
 
-La ejecución se realizó con Python 3.12 en Windows. El código declara Python
+La ejecución se realizó con Python 3.14 en Windows. El código declara Python
 3.11 como mínimo, pero esa versión no se ejecutó por separado. No se hicieron
 pruebas de carga, penetración, múltiples procesos ni durabilidad ante corte de
 energía. El manejo de un fallo de reemplazo se probó mediante OSError simulado.
@@ -583,7 +583,7 @@ El trabajo práctico integrador fue desarrollado en modalidad grupal por **Ferm�
 - **Aportes y responsabilidades de Fermín Alliot:**
   - Definición del caso de estudio y alcance: modelado de las reglas de negocio de las solicitudes académicas, estados y transiciones permitidas.
   - Implementación del prototipo base (`solicitudes/inicial.py`): construcción deliberada de la clase monolítica `GestorInicial` con deuda técnica intencional y code smells para habilitar el diagnóstico formativo.
-  - Diagnóstico de calidad: identificación de debilidades de dominio (Primitive Obsession en estados/tipos, Divergent Change y Large Class).
+  - Diagnóstico de calidad: identificación de debilidades de dominio (Primitive Obsession en estados y tipos, Long Method y responsabilidades divergentes).
   - Refactoring del modelo de dominio: diseño e implementación de la entidad inmutable `Solicitud` en `dominio.py`, encapsulación de invariantes en `__post_init__`, y creación de los objetos de parámetros `NuevaSolicitud` y `FiltroSolicitudes`.
   - Pruebas de contrato y caracterización: desarrollo de `test_contrato.py` y `test_dominio.py` para asegurar que las transiciones respeten las reglas y que ambas versiones presenten equivalencia observable.
 
